@@ -317,7 +317,7 @@ public class TelaCameraGUI extends javax.swing.JFrame {
                 }
                 this.telaInicialCPFGUI.setDadosCarregTO(senhaRetornoPST.retDadosCarreg(this.telaInicialCPFGUI.getDadosCarregTO()));
                 BufferedImage image = webcam.getImage();
-                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
+                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
                 panel.resume();
                 this.telaInicialCPFGUI.getTelaImprimirSenhaGUI().setFechaTela(false);
                 this.telaInicialCPFGUI.getTelaImprimirSenhaGUI().exibir();

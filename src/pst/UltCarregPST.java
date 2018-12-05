@@ -61,7 +61,7 @@ public class UltCarregPST {
             callableStatement.registerOutParameter(23, java.sql.Types.VARCHAR);
             callableStatement.registerOutParameter(24, java.sql.Types.VARCHAR);
             callableStatement.registerOutParameter(25, java.sql.Types.VARCHAR);
-
+            
             callableStatement.executeUpdate();
 
             if (callableStatement.getString(3) != null) {

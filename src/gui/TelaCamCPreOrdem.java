@@ -48,13 +48,10 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jButtonCanc = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
-        jLabelMsg1 = new javax.swing.JLabel();
         jButtonOK = new javax.swing.JButton();
-        jLabelMsg4 = new javax.swing.JLabel();
-        jLabelMsg5 = new javax.swing.JLabel();
-        jLabelMsg2 = new javax.swing.JLabel();
-        jLabelMsg3 = new javax.swing.JLabel();
         jLabelTitulo2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabelMsg = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -99,14 +96,6 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         getContentPane().add(jButtonFechar, gridBagConstraints);
 
-        jLabelMsg1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabelMsg1.setText("Motorista em processo de carregamento, produto 2-AÇÚCAR ENSACADO");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(40, 20, 0, 20);
-        getContentPane().add(jLabelMsg1, gridBagConstraints);
-
         jButtonOK.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jButtonOK.setText("OK");
         jButtonOK.addActionListener(new java.awt.event.ActionListener() {
@@ -116,43 +105,11 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 60;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
         getContentPane().add(jButtonOK, gridBagConstraints);
-
-        jLabelMsg4.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabelMsg4.setText("Operação não permitida.");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        getContentPane().add(jLabelMsg4, gridBagConstraints);
-
-        jLabelMsg5.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabelMsg5.setText("Por favor, dirija-se ao núcleo fiscal.");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        getContentPane().add(jLabelMsg5, gridBagConstraints);
-
-        jLabelMsg2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabelMsg2.setText("pré-ordem senha ACS5272");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        getContentPane().add(jLabelMsg2, gridBagConstraints);
-
-        jLabelMsg3.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabelMsg3.setText("produto 2-AÇÚCAR ENSACADO");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        getContentPane().add(jLabelMsg3, gridBagConstraints);
 
         jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo2.setText("SISTEMA DE");
@@ -161,6 +118,20 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
         getContentPane().add(jLabelTitulo2, gridBagConstraints);
+
+        jLabelMsg.setColumns(30);
+        jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        jLabelMsg.setRows(10);
+        jLabelMsg.setDisabledTextColor(new java.awt.Color(255, 51, 51));
+        jLabelMsg.setEnabled(false);
+        jLabelMsg.setPreferredSize(new java.awt.Dimension(800, 350));
+        jScrollPane1.setViewportView(jLabelMsg);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -253,22 +224,17 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCanc;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonOK;
-    private javax.swing.JLabel jLabelMsg1;
-    private javax.swing.JLabel jLabelMsg2;
-    private javax.swing.JLabel jLabelMsg3;
-    private javax.swing.JLabel jLabelMsg4;
-    private javax.swing.JLabel jLabelMsg5;
+    private javax.swing.JTextArea jLabelMsg;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     public void preencher() {
-        String[] textoSeparado = this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(" com a ", ".").replace(", produto", ". produto").split(Pattern.quote("."));
-        jLabelMsg1.setText(textoSeparado[0]);
-        jLabelMsg2.setText(textoSeparado[1]);
-        jLabelMsg3.setText(textoSeparado[2]);
-        jLabelMsg4.setText(textoSeparado[3]);
-        jLabelMsg5.setText(textoSeparado[4]);
+//        String texto = this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(" com a ", ".").replace(", produto", ". produto");
+//        jLabelMsg.setText(texto.replace(".", ".\n"));
+            jLabelMsg.setText(this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(".", ".\n").toUpperCase());
+            jLabelMsg.setLineWrap(true);
     }
 
 }

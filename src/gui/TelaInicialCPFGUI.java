@@ -21,6 +21,7 @@ import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -71,7 +72,6 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         initComponents();
 
 //        getContentPane().setBackground(Color.WHITE);
-        
         telaCameraGUI = new TelaCameraGUI(this);
         telaDadosNEncGUI = new TelaDadosNEncGUI(this);
         telaDadosUltCarregGUI = new TelaDadosUltCarregGUI(this);
@@ -435,52 +435,65 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (qtde == 11) {
-            UltCarregPST carregPST = new UltCarregPST();
-            ultViagemTO = carregPST.retUltViagem(textoCPF.replace(".", "").replace("-", ""));
-            dadosCarregTO = new DadosCarregTO();
-            dadosCarregTO.setCpf(textoCPF.replace(".", "").replace("-", ""));
-            dadosCarregTO.setNomeMotorista(ultViagemTO.getNomeMotorista());
-            if (ultViagemTO.getNomeMotorista().equals("0")) {
-                if (ultViagemTO.getMsgErro().equals("0")) {
-                    dadosCarregTO.setConfirmaDados(0);
-                    dadosCarregTO.setRgMotorista(null);
-                    dadosCarregTO.setCnhMotorista(null);
-                    dadosCarregTO.setValCnhMotorista(null);
-                    dadosCarregTO.setIdCliente(null);
-                    telaDadosNEncGUI.preenche();
-                    telaDadosNEncGUI.setVisible(true);
-                    this.setVisible(false);
+            String cpfLimpo = textoCPF.replace(".", "").replace("-", "");
+//            if (isCPF(cpfLimpo)) {
+                UltCarregPST carregPST = new UltCarregPST();
+                ultViagemTO = carregPST.retUltViagem(cpfLimpo);
+                dadosCarregTO = new DadosCarregTO();
+                dadosCarregTO.setCpf(cpfLimpo);
+                dadosCarregTO.setNomeMotorista(ultViagemTO.getNomeMotorista());
+                if (ultViagemTO.getNomeMotorista().equals("0")) {
+                    if (ultViagemTO.getMsgErro().equals("0")) {
+                        dadosCarregTO.setConfirmaDados(0);
+                        dadosCarregTO.setRgMotorista(null);
+                        dadosCarregTO.setCnhMotorista(null);
+                        dadosCarregTO.setValCnhMotorista(null);
+                        dadosCarregTO.setIdCliente(null);
+                        telaDadosNEncGUI.preenche();
+                        telaDadosNEncGUI.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        dadosCarregTO.setMsgErro(ultViagemTO.getMsgErro());
+                        telaCamCPreOrdem.preencher();
+                        telaCamCPreOrdem.setVisible(true);
+                        this.setVisible(false);
+                    }
                 } else {
-                    dadosCarregTO.setMsgErro(ultViagemTO.getMsgErro());
-                    telaCamCPreOrdem.preencher();
-                    telaCamCPreOrdem.setVisible(true);
+                    dadosCarregTO.setConfirmaDados(1);
+                    dadosCarregTO.setCapacidade(ultViagemTO.getCapacidade());
+                    dadosCarregTO.setCnhMotorista(ultViagemTO.getCnhMotorista());
+                    dadosCarregTO.setDescrProdCarreg(ultViagemTO.getDescrProdCarreg());
+                    dadosCarregTO.setIdProdCarreg(ultViagemTO.getIdProdCarreg());
+                    dadosCarregTO.setIdTercTransp(ultViagemTO.getIdTercTransp());
+                    dadosCarregTO.setNomeTransp(ultViagemTO.getNomeTransp());
+                    dadosCarregTO.setPlaca1(ultViagemTO.getPlaca1());
+                    dadosCarregTO.setPlaca2(ultViagemTO.getPlaca2());
+                    dadosCarregTO.setPlaca3(ultViagemTO.getPlaca3());
+                    dadosCarregTO.setRgMotorista(ultViagemTO.getRgMotorista());
+                    dadosCarregTO.setValCnhMotorista(ultViagemTO.getValCnhMotorista());
+                    dadosCarregTO.setIdCliente(ultViagemTO.getIdCliente());
+                    dadosCarregTO.setDescrCliente(ultViagemTO.getDescrCliente());
+                    dadosCarregTO.setRuaCliente(ultViagemTO.getRuaCliente());
+                    dadosCarregTO.setNumCliente(ultViagemTO.getNumCliente());
+                    dadosCarregTO.setBairroCliente(ultViagemTO.getBairroCliente());
+                    dadosCarregTO.setComplCliente(ultViagemTO.getComplCliente());
+                    dadosCarregTO.setCidadeCliente(ultViagemTO.getCidadeCliente());
+                    dadosCarregTO.setEstadoCliente(ultViagemTO.getEstadoCliente());
+                    telaDadosUltCarregGUI.carreg();
+                    telaDadosUltCarregGUI.setVisible(true);
                     this.setVisible(false);
                 }
-            } else {
-                dadosCarregTO.setConfirmaDados(1);
-                dadosCarregTO.setCapacidade(ultViagemTO.getCapacidade());
-                dadosCarregTO.setCnhMotorista(ultViagemTO.getCnhMotorista());
-                dadosCarregTO.setDescrProdCarreg(ultViagemTO.getDescrProdCarreg());
-                dadosCarregTO.setIdProdCarreg(ultViagemTO.getIdProdCarreg());
-                dadosCarregTO.setIdTercTransp(ultViagemTO.getIdTercTransp());
-                dadosCarregTO.setNomeTransp(ultViagemTO.getNomeTransp());
-                dadosCarregTO.setPlaca1(ultViagemTO.getPlaca1());
-                dadosCarregTO.setPlaca2(ultViagemTO.getPlaca2());
-                dadosCarregTO.setPlaca3(ultViagemTO.getPlaca3());
-                dadosCarregTO.setRgMotorista(ultViagemTO.getRgMotorista());
-                dadosCarregTO.setValCnhMotorista(ultViagemTO.getValCnhMotorista());
-                dadosCarregTO.setIdCliente(ultViagemTO.getIdCliente());
-                dadosCarregTO.setDescrCliente(ultViagemTO.getDescrCliente());
-                dadosCarregTO.setRuaCliente(ultViagemTO.getRuaCliente());
-                dadosCarregTO.setNumCliente(ultViagemTO.getNumCliente());
-                dadosCarregTO.setBairroCliente(ultViagemTO.getBairroCliente());
-                dadosCarregTO.setComplCliente(ultViagemTO.getComplCliente());
-                dadosCarregTO.setCidadeCliente(ultViagemTO.getCidadeCliente());
-                dadosCarregTO.setEstadoCliente(ultViagemTO.getEstadoCliente());
-                telaDadosUltCarregGUI.carreg();
-                telaDadosUltCarregGUI.setVisible(true);
-                this.setVisible(false);
-            }
+//            } else {
+//                jDialogDefault.setTxtMsg("CPF INVÁLIDO.\nPor favor, digite novamente o CPF.");
+//                Timer timer = new Timer(4000, new ActionListener() {
+//                    public void actionPerformed(ActionEvent e) {
+//                        jDialogDefault.setVisible(false);
+//                    }
+//                });
+//                timer.setRepeats(false);
+//                timer.start();
+//                jDialogDefault.setVisible(true);
+//            }
         } else {
             jDialogDefault.setTxtMsg("Por Favor, termine de digitar o CPF.");
             Timer timer = new Timer(4000, new ActionListener() {
@@ -856,6 +869,68 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
 
     public String getTextoCPF() {
         return textoCPF;
+    }
+
+    public boolean isCPF(String CPF) {
+        // considera-se erro CPF's formados por uma sequencia de numeros iguais
+        if (CPF.equals("00000000000")
+                || CPF.equals("11111111111")
+                || CPF.equals("22222222222") || CPF.equals("33333333333")
+                || CPF.equals("44444444444") || CPF.equals("55555555555")
+                || CPF.equals("66666666666") || CPF.equals("77777777777")
+                || CPF.equals("88888888888") || CPF.equals("99999999999")
+                || (CPF.length() != 11)) {
+            return (false);
+        }
+
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+
+        // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
+        try {
+            // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i = 0; i < 9; i++) {
+                // converte o i-esimo caractere do CPF em um numero:
+                // por exemplo, transforma o caractere '0' no inteiro 0         
+                // (48 eh a posicao de '0' na tabela ASCII)         
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11)) {
+                dig10 = '0';
+            } else {
+                dig10 = (char) (r + 48); // converte no respectivo caractere numerico
+            }
+            // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for (i = 0; i < 10; i++) {
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11)) {
+                dig11 = '0';
+            } else {
+                dig11 = (char) (r + 48);
+            }
+
+            // Verifica se os digitos calculados conferem com os digitos informados.
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10))) {
+                return (true);
+            } else {
+                return (false);
+            }
+        } catch (InputMismatchException erro) {
+            return (false);
+        }
     }
 
 }

@@ -34,20 +34,13 @@ public class JDialogDefault extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabelMSG = new javax.swing.JLabel();
         jButtonOK = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jLabelMSG.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabelMSG.setText("MENSAGEM");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
-        getContentPane().add(jLabelMSG, gridBagConstraints);
 
         jButtonOK.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButtonOK.setText("OK");
@@ -58,11 +51,23 @@ public class JDialogDefault extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipadx = 70;
         gridBagConstraints.ipady = 70;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         getContentPane().add(jButtonOK, gridBagConstraints);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setDisabledTextColor(new java.awt.Color(204, 0, 0));
+        jTextArea1.setEnabled(false);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         setBounds(450, 250, 560, 398);
     }// </editor-fold>//GEN-END:initComponents
@@ -118,11 +123,12 @@ public class JDialogDefault extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonOK;
-    private javax.swing.JLabel jLabelMSG;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
     public void setTxtMsg(String texto){
-        jLabelMSG.setText(texto);
+        jTextArea1.setText(texto);
     }
 
 }
