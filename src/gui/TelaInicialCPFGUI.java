@@ -55,13 +55,14 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
     private TelaImprimirSenhaGUI telaImprimirSenhaGUI;
     private TelaPlacaGUI telaPlacaGUI;
     private TelaProdutoUltCarregGUI telaProdutoUltCarregGUI;
-    private TelaTranspUltCarreg telaTranspUltCarreg;
+    private TelaTranspUltCarregGUI telaTranspUltCarregGUI;
     private TelaVeicUltCarregGUI telaVeicUltCarregGUI;
     private TelaWhatsappGUI telaWhatsappGUI;
     private TelaProdutoCarregGUI telaProdutoCarregGUI;
     private TelaClassifProdCarregGUI telaClassifProdCarregGUI;
-    private TelaCamCPreOrdem telaCamCPreOrdem;
-    private TelaClienteUltCarreg telaClienteUltCarreg;
+    private TelaCamCPreOrdemGUI telaCamCPreOrdemGUI;
+    private TelaClienteUltCarregGUI telaClienteUltCarregGUI;
+    private TelaListaClienteGUI telaListaClienteGUI;
     private JDialogDefault jDialogDefault;
     private boolean statusMSG;
 
@@ -78,13 +79,14 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         telaImprimirSenhaGUI = new TelaImprimirSenhaGUI(this);
         telaPlacaGUI = new TelaPlacaGUI(this);
         telaProdutoUltCarregGUI = new TelaProdutoUltCarregGUI(this);
-        telaTranspUltCarreg = new TelaTranspUltCarreg(this);
+        telaTranspUltCarregGUI = new TelaTranspUltCarregGUI(this);
         telaVeicUltCarregGUI = new TelaVeicUltCarregGUI(this);
         telaWhatsappGUI = new TelaWhatsappGUI(this);
         telaProdutoCarregGUI = new TelaProdutoCarregGUI(this);
         telaClassifProdCarregGUI = new TelaClassifProdCarregGUI(this);
-        telaCamCPreOrdem = new TelaCamCPreOrdem(this);
-        telaClienteUltCarreg = new TelaClienteUltCarreg(this);
+        telaCamCPreOrdemGUI = new TelaCamCPreOrdemGUI(this);
+        telaClienteUltCarregGUI = new TelaClienteUltCarregGUI(this);
+        telaListaClienteGUI = new TelaListaClienteGUI(this);
         jDialogDefault = new JDialogDefault(new javax.swing.JFrame(), true, this);
         statusMSG = true;
 
@@ -437,6 +439,7 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         if (qtde == 11) {
             String cpfLimpo = textoCPF.replace(".", "").replace("-", "");
 //            if (isCPF(cpfLimpo)) {
+            if (true) {
                 UltCarregPST carregPST = new UltCarregPST();
                 ultViagemTO = carregPST.retUltViagem(cpfLimpo);
                 dadosCarregTO = new DadosCarregTO();
@@ -454,8 +457,8 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
                         this.setVisible(false);
                     } else {
                         dadosCarregTO.setMsgErro(ultViagemTO.getMsgErro());
-                        telaCamCPreOrdem.preencher();
-                        telaCamCPreOrdem.setVisible(true);
+                        telaCamCPreOrdemGUI.preencher();
+                        telaCamCPreOrdemGUI.setVisible(true);
                         this.setVisible(false);
                     }
                 } else {
@@ -483,17 +486,17 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
                     telaDadosUltCarregGUI.setVisible(true);
                     this.setVisible(false);
                 }
-//            } else {
-//                jDialogDefault.setTxtMsg("CPF INVÁLIDO.\nPor favor, digite novamente o CPF.");
-//                Timer timer = new Timer(4000, new ActionListener() {
-//                    public void actionPerformed(ActionEvent e) {
-//                        jDialogDefault.setVisible(false);
-//                    }
-//                });
-//                timer.setRepeats(false);
-//                timer.start();
-//                jDialogDefault.setVisible(true);
-//            }
+            } else {
+                jDialogDefault.setTxtMsg("CPF INVÁLIDO.\nPor favor, digite novamente o CPF.");
+                Timer timer = new Timer(4000, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jDialogDefault.setVisible(false);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+                jDialogDefault.setVisible(true);
+            }
         } else {
             jDialogDefault.setTxtMsg("Por Favor, termine de digitar o CPF.");
             Timer timer = new Timer(4000, new ActionListener() {
@@ -512,22 +515,6 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         apagarLabelCPF();
-//        Document document = new Document();
-//        try {
-//            Desktop desktop = Desktop.getDesktop();
-//            PdfWriter.getInstance(document, new FileOutputStream("K:\\carreg\\impressao.pdf"));
-//            document.open();
-//            File file = new File("K:\\carreg\\impressao.pdf");
-//            desktop.print(file);
-//            // adicionando um parágrafo no documento
-//            document.add(new Paragraph("Gerando PDF - Java"));
-//        } catch (DocumentException de) {
-//            System.err.println(de.getMessage());
-//        } catch (IOException ioe) {
-//            System.err.println(ioe.getMessage());
-//        }
-//        document.close();
-
 
     }//GEN-LAST:event_jButtonCorrigePCFActionPerformed
 
@@ -792,12 +779,12 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         this.telaProdutoUltCarregGUI = telaProdutoUltCarregGUI;
     }
 
-    public TelaTranspUltCarreg getTelaTranspUltCarreg() {
-        return telaTranspUltCarreg;
+    public TelaTranspUltCarregGUI getTelaTranspUltCarregGUI() {
+        return telaTranspUltCarregGUI;
     }
 
-    public void setTelaTranspUltCarreg(TelaTranspUltCarreg telaTranspUltCarreg) {
-        this.telaTranspUltCarreg = telaTranspUltCarreg;
+    public void setTelaTranspUltCarregGUI(TelaTranspUltCarregGUI telaTranspUltCarregGUI) {
+        this.telaTranspUltCarregGUI = telaTranspUltCarregGUI;
     }
 
     public TelaVeicUltCarregGUI getTelaVeicUltCarregGUI() {
@@ -832,14 +819,32 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         this.telaClassifProdCarregGUI = telaClassifProdCarregGUI;
     }
 
-    public TelaClienteUltCarreg getTelaClienteUltCarreg() {
-        return telaClienteUltCarreg;
+    public TelaClienteUltCarregGUI getTelaClienteUltCarregGUI() {
+        return telaClienteUltCarregGUI;
     }
 
-    public void setTelaClienteUltCarreg(TelaClienteUltCarreg telaClienteUltCarreg) {
-        this.telaClienteUltCarreg = telaClienteUltCarreg;
+    public void setTelaClienteUltCarregGUI(TelaClienteUltCarregGUI telaClienteUltCarregGUI) {
+        this.telaClienteUltCarregGUI = telaClienteUltCarregGUI;
     }
 
+    public TelaListaClienteGUI getTelaListaClienteGUI() {
+        return telaListaClienteGUI;
+    }
+
+    public void setTelaListaClienteGUI(TelaListaClienteGUI telaListaClienteGUI) {
+        this.telaListaClienteGUI = telaListaClienteGUI;
+    }
+
+    public TelaCamCPreOrdemGUI getTelaCamCPreOrdemGUI() {
+        return telaCamCPreOrdemGUI;
+    }
+
+    public void setTelaCamCPreOrdemGUI(TelaCamCPreOrdemGUI telaCamCPreOrdemGUI) {
+        this.telaCamCPreOrdemGUI = telaCamCPreOrdemGUI;
+    }
+
+    
+    
     public DadosCarregTO getDadosCarregTO() {
         return dadosCarregTO;
     }

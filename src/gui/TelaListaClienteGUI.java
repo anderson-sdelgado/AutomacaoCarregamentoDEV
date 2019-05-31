@@ -9,30 +9,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.Arrays;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.Timer;
+import pst.ClientePST;
 import pst.SenhaPST;
+import to.ClienteTO;
 
 /**
  *
  * @author anderson
  */
-public class TelaCamCPreOrdem extends javax.swing.JFrame {
+public class TelaListaClienteGUI extends javax.swing.JFrame {
 
     private TelaInicialCPFGUI telaInicialCPFGUI;
+    private JDialogListaCliente dialog = new JDialogListaCliente(new javax.swing.JFrame(), true, this);
+    private int posLista;
+    private ArrayList clienteList;
 
     /**
-     * Creates new form TelaCamCPreOrdem
+     * Creates new form TelaListaClienteGUI
      */
-    public TelaCamCPreOrdem(TelaInicialCPFGUI telaInicialCPFGUI) {
+    public TelaListaClienteGUI(TelaInicialCPFGUI telaInicialCPFGUI) {
         initComponents();
+
+        preencheLista();
+
         this.telaInicialCPFGUI = telaInicialCPFGUI;
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+
     }
 
     /**
@@ -45,71 +54,16 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabelTitulo = new javax.swing.JLabel();
-        jButtonCanc = new javax.swing.JButton();
-        jButtonFechar = new javax.swing.JButton();
-        jButtonOK = new javax.swing.JButton();
         jLabelTitulo2 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
+        jButtonFechar = new javax.swing.JButton();
+        jButtonCanc = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jLabelMsg = new javax.swing.JTextArea();
+        jListCliente = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelTitulo.setText("AUTOATENDIMENTO");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        getContentPane().add(jLabelTitulo, gridBagConstraints);
-
-        jButtonCanc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonCanc.setText("CANCELAR");
-        jButtonCanc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 65;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        getContentPane().add(jButtonCanc, gridBagConstraints);
-
-        jButtonFechar.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButtonFechar.setText("X");
-        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 40;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jButtonFechar, gridBagConstraints);
-
-        jButtonOK.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButtonOK.setText("OK");
-        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOKActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 60;
-        gridBagConstraints.ipady = 60;
-        gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
-        getContentPane().add(jButtonOK, gridBagConstraints);
 
         jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo2.setText("SISTEMA DE");
@@ -119,22 +73,81 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
         getContentPane().add(jLabelTitulo2, gridBagConstraints);
 
-        jLabelMsg.setColumns(30);
-        jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        jLabelMsg.setRows(10);
-        jLabelMsg.setDisabledTextColor(new java.awt.Color(255, 51, 51));
-        jLabelMsg.setEnabled(false);
-        jLabelMsg.setPreferredSize(new java.awt.Dimension(800, 350));
-        jScrollPane1.setViewportView(jLabelMsg);
+        jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelTitulo.setText("AUTOATENDIMENTO");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        getContentPane().add(jLabelTitulo, gridBagConstraints);
+
+        jButtonFechar.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jButtonFechar.setText("X");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipady = 40;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        getContentPane().add(jButtonFechar, gridBagConstraints);
+
+        jButtonCanc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonCanc.setText("CANCELAR");
+        jButtonCanc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipady = 65;
+        getContentPane().add(jButtonCanc, gridBagConstraints);
+
+        jListCliente.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jListCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListClienteMouseClicked(evt);
+            }
+        });
+        jListCliente.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListClienteValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListCliente);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 9;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 200;
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jListClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListClienteMouseClicked
+        // TODO add your handling code here:
+
+        posLista = jListCliente.getSelectedIndex();
+        dialog.setTxtMsg("O Cliente selecionado foi o\n " + jListCliente.getSelectedValue() + "?");
+        dialog.setVisible(true);
+
+    }//GEN-LAST:event_jListClienteMouseClicked
+
+    private void jListClienteValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListClienteValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jListClienteValueChanged
 
     private void jButtonCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancActionPerformed
         // TODO add your handling code here:
@@ -145,19 +158,10 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonCancActionPerformed
 
-    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        // TODO add your handling code here:
-
-        this.telaInicialCPFGUI.limpaCPF();
-        this.telaInicialCPFGUI.setVisible(true);
-        this.setVisible(false);
-
-    }//GEN-LAST:event_jButtonOKActionPerformed
-
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // TODO add your handling code here:
-
-        JLabel label = new JLabel("Digite a senha:");
+        
+                JLabel label = new JLabel("Digite a senha:");
         JPasswordField jpf = new JPasswordField();
         JOptionPane msg = new JOptionPane(new Object[]{label, jpf}, JOptionPane.OK_CANCEL_OPTION);
         JDialog dlg = msg.createDialog("Password");
@@ -182,12 +186,12 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
         if (senha.equals(senhaPST.retornaSenha())) {
             System.exit(0);
         }
-
+        
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
+    /**
+     * @param args the command line arguments
+     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -202,20 +206,20 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(TelaCamCPreOrdem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaListaClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(TelaCamCPreOrdem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaListaClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(TelaCamCPreOrdem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaListaClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(TelaCamCPreOrdem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaListaClienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new TelaCamCPreOrdem().setVisible(true);
+//                new TelaListaClienteGUI().setVisible(true);
 //            }
 //        });
 //    }
@@ -223,18 +227,36 @@ public class TelaCamCPreOrdem extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCanc;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonOK;
-    private javax.swing.JTextArea jLabelMsg;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo2;
+    private javax.swing.JList<String> jListCliente;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    public void preencher() {
-//        String texto = this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(" com a ", ".").replace(", produto", ". produto");
-//        jLabelMsg.setText(texto.replace(".", ".\n"));
-            jLabelMsg.setText(this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(".", ".\n").toUpperCase());
-            jLabelMsg.setLineWrap(true);
+    public void salvarCliente() {
+
+        ClienteTO clienteTO = (ClienteTO) clienteList.get(posLista);
+        this.telaInicialCPFGUI.getDadosCarregTO().setIdCliente(clienteTO.getIdCliente());
+
+        this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
+        this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
+        this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+
+    }
+
+    public void preencheLista() {
+
+        ClientePST clientePST = new ClientePST();
+        clienteList = clientePST.retornaListCliente();
+
+        DefaultListModel modelo = new DefaultListModel();
+        for (int i = 0; i < clienteList.size(); i++) {
+            ClienteTO clienteTO = (ClienteTO) clienteList.get(i);
+            modelo.addElement(clienteTO.getDescrCliente());
+        }
+
+        jListCliente.setModel(modelo);
+
     }
 
 }

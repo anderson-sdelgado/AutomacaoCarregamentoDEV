@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,14 +22,14 @@ import pst.SenhaPST;
  *
  * @author anderson
  */
-public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
+public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
 
     private TelaInicialCPFGUI telaInicialCPFGUI;
 
     /**
-     * Creates new form TelaProdutoUltCarregGUI
+     * Creates new form TelaCamCPreOrdem
      */
-    public TelaProdutoUltCarregGUI(TelaInicialCPFGUI telaInicialCPFGUI) {
+    public TelaCamCPreOrdemGUI(TelaInicialCPFGUI telaInicialCPFGUI) {
         initComponents();
         this.telaInicialCPFGUI = telaInicialCPFGUI;
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -43,28 +45,17 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabelPergProdUltCarreg = new javax.swing.JLabel();
         jLabelTitulo = new javax.swing.JLabel();
-        jButtonFechar = new javax.swing.JButton();
         jButtonCanc = new javax.swing.JButton();
-        jButtonNaoProdUltCarreg = new javax.swing.JButton();
-        jButtonSimProdUltCarreg = new javax.swing.JButton();
-        jLabelProdUltCarreg = new javax.swing.JLabel();
+        jButtonFechar = new javax.swing.JButton();
+        jButtonOK = new javax.swing.JButton();
         jLabelTitulo2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabelMsg = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        jLabelPergProdUltCarreg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabelPergProdUltCarreg.setText("O produto a ser carregado é?");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(120, 0, 20, 0);
-        getContentPane().add(jLabelPergProdUltCarreg, gridBagConstraints);
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo.setText("AUTOATENDIMENTO");
@@ -72,6 +63,22 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         getContentPane().add(jLabelTitulo, gridBagConstraints);
+
+        jButtonCanc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonCanc.setText("CANCELAR");
+        jButtonCanc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipady = 65;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
+        getContentPane().add(jButtonCanc, gridBagConstraints);
 
         jButtonFechar.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jButtonFechar.setText("X");
@@ -81,7 +88,7 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 40;
@@ -89,60 +96,20 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         getContentPane().add(jButtonFechar, gridBagConstraints);
 
-        jButtonCanc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonCanc.setText("Cancelar");
-        jButtonCanc.addActionListener(new java.awt.event.ActionListener() {
+        jButtonOK.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jButtonOK.setText("OK");
+        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancActionPerformed(evt);
+                jButtonOKActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 65;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
-        getContentPane().add(jButtonCanc, gridBagConstraints);
-
-        jButtonNaoProdUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonNaoProdUltCarreg.setText("NÃO");
-        jButtonNaoProdUltCarreg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNaoProdUltCarregActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 70;
-        gridBagConstraints.insets = new java.awt.Insets(50, 150, 10, 50);
-        getContentPane().add(jButtonNaoProdUltCarreg, gridBagConstraints);
-
-        jButtonSimProdUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonSimProdUltCarreg.setText("SIM");
-        jButtonSimProdUltCarreg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSimProdUltCarregActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 70;
-        gridBagConstraints.insets = new java.awt.Insets(50, 50, 10, 150);
-        getContentPane().add(jButtonSimProdUltCarreg, gridBagConstraints);
-
-        jLabelProdUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 40)); // NOI18N
-        jLabelProdUltCarreg.setText("Açúcar Ensacado");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 120, 0);
-        getContentPane().add(jLabelProdUltCarreg, gridBagConstraints);
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
+        getContentPane().add(jButtonOK, gridBagConstraints);
 
         jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo2.setText("SISTEMA DE");
@@ -152,8 +119,40 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
         getContentPane().add(jLabelTitulo2, gridBagConstraints);
 
+        jLabelMsg.setColumns(30);
+        jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        jLabelMsg.setRows(10);
+        jLabelMsg.setDisabledTextColor(new java.awt.Color(255, 51, 51));
+        jLabelMsg.setEnabled(false);
+        jLabelMsg.setPreferredSize(new java.awt.Dimension(800, 350));
+        jScrollPane1.setViewportView(jLabelMsg);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        getContentPane().add(jScrollPane1, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancActionPerformed
+        // TODO add your handling code here:
+
+        this.telaInicialCPFGUI.limpaCPF();
+        this.telaInicialCPFGUI.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jButtonCancActionPerformed
+
+    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+        // TODO add your handling code here:
+
+        this.telaInicialCPFGUI.limpaCPF();
+        this.telaInicialCPFGUI.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // TODO add your handling code here:
@@ -186,42 +185,9 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
-    private void jButtonCancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancActionPerformed
-        // TODO add your handling code here:
-
-        this.telaInicialCPFGUI.limpaCPF();
-        this.telaInicialCPFGUI.setVisible(true);
-        this.setVisible(false);
-
-    }//GEN-LAST:event_jButtonCancActionPerformed
-
-    private void jButtonSimProdUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimProdUltCarregActionPerformed
-        // TODO add your handling code here:
-
-        if (this.telaInicialCPFGUI.getDadosCarregTO().getIdProdCarreg().equals("5")) {
-            this.telaInicialCPFGUI.getTelaClienteUltCarregGUI().carreg();
-            this.telaInicialCPFGUI.getTelaClienteUltCarregGUI().setVisible(true);
-            this.setVisible(false);
-        } else {
-            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
-            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
-            this.setVisible(false);
-        }
-
-    }//GEN-LAST:event_jButtonSimProdUltCarregActionPerformed
-
-    private void jButtonNaoProdUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNaoProdUltCarregActionPerformed
-        // TODO add your handling code here:
-
-        this.telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
-        this.telaInicialCPFGUI.getTelaProdutoCarregGUI().setVisible(true);
-        this.setVisible(false);
-
-    }//GEN-LAST:event_jButtonNaoProdUltCarregActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+//    /**
+//     * @param args the command line arguments
+//     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -236,20 +202,20 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(TelaProdutoUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaCamCPreOrdemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(TelaProdutoUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaCamCPreOrdemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(TelaProdutoUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaCamCPreOrdemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(TelaProdutoUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaCamCPreOrdemGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new TelaProdutoUltCarregGUI().setVisible(true);
+//                new TelaCamCPreOrdemGUI().setVisible(true);
 //            }
 //        });
 //    }
@@ -257,16 +223,18 @@ public class TelaProdutoUltCarregGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCanc;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonNaoProdUltCarreg;
-    private javax.swing.JButton jButtonSimProdUltCarreg;
-    private javax.swing.JLabel jLabelPergProdUltCarreg;
-    private javax.swing.JLabel jLabelProdUltCarreg;
+    private javax.swing.JButton jButtonOK;
+    private javax.swing.JTextArea jLabelMsg;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    public void carreg() {
-        jLabelProdUltCarreg.setText(this.telaInicialCPFGUI.getDadosCarregTO().getDescrProdCarreg());
+    public void preencher() {
+//        String texto = this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(" com a ", ".").replace(", produto", ". produto");
+//        jLabelMsg.setText(texto.replace(".", ".\n"));
+            jLabelMsg.setText(this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(".", ".\n").toUpperCase());
+            jLabelMsg.setLineWrap(true);
     }
 
 }

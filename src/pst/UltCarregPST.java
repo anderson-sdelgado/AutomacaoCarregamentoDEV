@@ -33,7 +33,7 @@ public class UltCarregPST {
 
         try {
 
-            conn = ConnectionQAPST.getInstance().getConnection();
+            conn = ConnectionPST.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
 
             callableStatement.setString(1, cpf);

@@ -86,5 +86,6 @@ public class DadosCarregTO extends UltViagemTO {
     public void setDescrStatus(String descrStatus) {
         this.descrStatus = descrStatus;
     }
+
     
 }

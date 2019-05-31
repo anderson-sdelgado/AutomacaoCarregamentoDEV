@@ -240,13 +240,11 @@ public class TelaProdutoCarregGUI extends javax.swing.JFrame {
 
         this.telaInicialCPFGUI.getDadosCarregTO().setIdProdCarreg("5");
         if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
-            this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
-            this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
-            this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+            this.telaInicialCPFGUI.getTelaListaClienteGUI().setVisible(true);
             this.setVisible(false);
         } else {
-            this.telaInicialCPFGUI.getTelaClienteUltCarreg().carreg();
-            this.telaInicialCPFGUI.getTelaClienteUltCarreg().setVisible(true);
+            this.telaInicialCPFGUI.getTelaClienteUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaClienteUltCarregGUI().setVisible(true);
             this.setVisible(false);
         }
 
@@ -262,8 +260,8 @@ public class TelaProdutoCarregGUI extends javax.swing.JFrame {
             this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
             this.setVisible(false);
         } else {
-            this.telaInicialCPFGUI.getTelaTranspUltCarreg().carreg();
-            this.telaInicialCPFGUI.getTelaTranspUltCarreg().setVisible(true);
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
             this.setVisible(false);
         }
 

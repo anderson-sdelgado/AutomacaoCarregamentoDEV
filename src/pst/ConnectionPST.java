@@ -20,20 +20,6 @@ public class ConnectionPST {
  */
     
       public final static String driver = "oracle.jdbc.driver.OracleDriver";
-      public final static String url = "jdbc:oracle:thin:@(DESCRIPTION = (ENABLE = BROKEN)(FAILOVER = ON)(LOAD_BALANCE = YES)" +
-                                                "    (ADDRESS = (PROTOCOL = TCP)(HOST = stafe-scan)(PORT = 1521))" +
-                                                "    (CONNECT_DATA =" +
-                                                "      (SERVER = DEDICATED)" +
-                                                "      (SERVICE_NAME = STAFE)" +
-                                                "      (FAILOVER_MODE =" +
-                                                "        (TYPE = SELECT)" +
-                                                "        (METHOD = BASIC)" +
-                                                "        (RETRIES = 180)" +
-                                                "        (DELAY = 5)" +
-                                                "       )" +
-                                                "    )" +
-                                                "  )";
-      
       public final static String usuario = "INTERFACE";
       public final static String senha   = "FGBNY946";
 
@@ -54,6 +40,60 @@ public class ConnectionPST {
   private void inicializar() {
     try {
       Class.forName(driver);
+      
+      int tipo = 2;
+      String url = "";
+      
+        switch (tipo) {
+            case 1:
+                url = "jdbc:oracle:thin:@(DESCRIPTION = (ENABLE = BROKEN)(FAILOVER = ON)(LOAD_BALANCE = YES)" +
+                        "    (ADDRESS = (PROTOCOL = TCP)(HOST = stafe-scan)(PORT = 1521))" +
+                        "    (CONNECT_DATA =" +
+                        "      (SERVER = DEDICATED)" +
+                        "      (SERVICE_NAME = STAFE)" +
+                        "      (FAILOVER_MODE =" +
+                        "        (TYPE = SELECT)" +
+                        "        (METHOD = BASIC)" +
+                        "        (RETRIES = 180)" +
+                        "        (DELAY = 5)" +
+                        "       )" +
+                        "    )" +
+                        "  )";
+                break;
+            case 2:
+                url = "jdbc:oracle:thin:@(DESCRIPTION = (ENABLE = BROKEN)(FAILOVER = ON)(LOAD_BALANCE = YES)" +
+                        "    (ADDRESS = (PROTOCOL = TCP)(HOST = stafe-scan)(PORT = 1521))" +
+                        "    (CONNECT_DATA =" +
+                        "      (SERVER = DEDICATED)" +
+                        "      (SERVICE_NAME = STAFEQA)" +
+                        "      (FAILOVER_MODE =" +
+                        "        (TYPE = SELECT)" +
+                        "        (METHOD = BASIC)" +
+                        "        (RETRIES = 180)" +
+                        "        (DELAY = 5)" +
+                        "       )" +
+                        "    )" +
+                        "  )";
+                break;
+            case 3:
+                url = "jdbc:oracle:thin:@(DESCRIPTION = (ENABLE = BROKEN)(FAILOVER = ON)(LOAD_BALANCE = YES)"
+                        + " (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.2.15)(PORT = 1521)) "
+                        + " (CONNECT_DATA = "
+                        + "      (SERVER = DEDICATED) "
+                        + "      (SERVICE_NAME = STAFEDEV) "
+                        + "      (FAILOVER_MODE = "
+                        + "        (TYPE = SELECT) "
+                        + "        (METHOD = BASIC) "
+                        + "        (RETRIES = 180) "
+                        + "        (DELAY = 5) "
+                        + "       )"
+                        + "    )"
+                        + "  )";
+                break;
+            default:
+                break;
+        }
+       
       connection = DriverManager.getConnection(url, usuario, senha);
     } catch (ClassNotFoundException e) {
       System.out.println("O driver nao pode ser carregado ["

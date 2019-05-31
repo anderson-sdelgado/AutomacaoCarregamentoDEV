@@ -244,7 +244,7 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
         } else {
             tipo = "2";
         }
-        if (this.telaInicialCPFGUI.getDadosCarregTO().getDescrStatus().equals("PENDENTE REVISÃO")) {
+        if (Integer.getInteger(this.telaInicialCPFGUI.getDadosCarregTO().getEtapa().trim()) == 2) {
             telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
         }
         jLabelMsg.setText(msgPST.retornaMsg(tipo, this.telaInicialCPFGUI.getDadosCarregTO().getConfirmaDados()).replace(".", ".\n").toUpperCase());

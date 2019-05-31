@@ -28,7 +28,7 @@ public class DadosRetornoPST {
 
         try {
 
-            conn = ConnectionQAPST.getInstance().getConnection();
+            conn = ConnectionPST.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
             
             callableStatement.setString(1, dadosCarregTO.getIdProdCarreg());

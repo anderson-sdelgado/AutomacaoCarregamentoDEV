@@ -201,8 +201,8 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
             this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
             this.setVisible(false);
         } else {
-            this.telaInicialCPFGUI.getTelaTranspUltCarreg().carreg();
-            this.telaInicialCPFGUI.getTelaTranspUltCarreg().setVisible(true);
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
             this.setVisible(false);
         }
 
@@ -223,8 +223,8 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
             this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
             this.setVisible(false);
         } else {
-            this.telaInicialCPFGUI.getTelaTranspUltCarreg().carreg();
-            this.telaInicialCPFGUI.getTelaTranspUltCarreg().setVisible(true);
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
             this.setVisible(false);
         }
 

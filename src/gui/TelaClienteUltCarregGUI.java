@@ -20,14 +20,14 @@ import pst.SenhaPST;
  *
  * @author anderson
  */
-public class TelaTranspUltCarreg extends javax.swing.JFrame {
+public class TelaClienteUltCarregGUI extends javax.swing.JFrame {
 
     private TelaInicialCPFGUI telaInicialCPFGUI;
 
     /**
-     * Creates new form TelaTranspUltCarreg
+     * Creates new form TelaTranspUltCarregGUI
      */
-    public TelaTranspUltCarreg(TelaInicialCPFGUI telaInicialCPFGUI) {
+    public TelaClienteUltCarregGUI(TelaInicialCPFGUI telaInicialCPFGUI) {
         initComponents();
         this.telaInicialCPFGUI = telaInicialCPFGUI;
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
@@ -43,34 +43,37 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jButtonNaoTranspUltCarreg = new javax.swing.JButton();
+        jButtonNaoClienteUltCarreg = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
-        jButtonSimTranspUltCarreg = new javax.swing.JButton();
+        jButtonSimClienteUltCarreg = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonCanc = new javax.swing.JButton();
         jLabelPergDadosUltCarreg = new javax.swing.JLabel();
-        jLabelTransp = new javax.swing.JLabel();
+        jLabelCliente = new javax.swing.JLabel();
         jLabelTitulo2 = new javax.swing.JLabel();
+        jLabelRuaNumero = new javax.swing.JLabel();
+        jLabelCidadeUF = new javax.swing.JLabel();
+        jLabelBairro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jButtonNaoTranspUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonNaoTranspUltCarreg.setText("NÃO");
-        jButtonNaoTranspUltCarreg.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNaoClienteUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButtonNaoClienteUltCarreg.setText("NÃO");
+        jButtonNaoClienteUltCarreg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNaoTranspUltCarregActionPerformed(evt);
+                jButtonNaoClienteUltCarregActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 70;
         gridBagConstraints.ipady = 70;
         gridBagConstraints.insets = new java.awt.Insets(50, 150, 10, 50);
-        getContentPane().add(jButtonNaoTranspUltCarreg, gridBagConstraints);
+        getContentPane().add(jButtonNaoClienteUltCarreg, gridBagConstraints);
 
         jButtonFechar.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jButtonFechar.setText("X");
@@ -88,20 +91,20 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         getContentPane().add(jButtonFechar, gridBagConstraints);
 
-        jButtonSimTranspUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonSimTranspUltCarreg.setText("SIM");
-        jButtonSimTranspUltCarreg.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSimClienteUltCarreg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButtonSimClienteUltCarreg.setText("SIM");
+        jButtonSimClienteUltCarreg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSimTranspUltCarregActionPerformed(evt);
+                jButtonSimClienteUltCarregActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.ipadx = 70;
         gridBagConstraints.ipady = 70;
         gridBagConstraints.insets = new java.awt.Insets(50, 50, 10, 150);
-        getContentPane().add(jButtonSimTranspUltCarreg, gridBagConstraints);
+        getContentPane().add(jButtonSimClienteUltCarreg, gridBagConstraints);
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo.setText("AUTOATENDIMENTO");
@@ -127,22 +130,22 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
         getContentPane().add(jButtonCanc, gridBagConstraints);
 
         jLabelPergDadosUltCarreg.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabelPergDadosUltCarreg.setText("A Transportadora do carregamento é?");
+        jLabelPergDadosUltCarreg.setText("O Cliente do carregamento é?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(120, 0, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(60, 0, 20, 0);
         getContentPane().add(jLabelPergDadosUltCarreg, gridBagConstraints);
 
-        jLabelTransp.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabelTransp.setText("Transportadora");
+        jLabelCliente.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
+        jLabelCliente.setText("Cliente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 120, 0);
-        getContentPane().add(jLabelTransp, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 0);
+        getContentPane().add(jLabelCliente, gridBagConstraints);
 
         jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelTitulo2.setText("SISTEMA DE");
@@ -151,6 +154,33 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
         getContentPane().add(jLabelTitulo2, gridBagConstraints);
+
+        jLabelRuaNumero.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelRuaNumero.setText("Rua Teste, 123");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        getContentPane().add(jLabelRuaNumero, gridBagConstraints);
+
+        jLabelCidadeUF.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelCidadeUF.setText("Nova Europa - SP");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 40, 0);
+        getContentPane().add(jLabelCidadeUF, gridBagConstraints);
+
+        jLabelBairro.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabelBairro.setText("Vila Teste");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        getContentPane().add(jLabelBairro, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -195,25 +225,36 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonCancActionPerformed
 
-    private void jButtonSimTranspUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimTranspUltCarregActionPerformed
+    private void jButtonSimClienteUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimClienteUltCarregActionPerformed
         // TODO add your handling code here:
 
-        this.telaInicialCPFGUI.getTelaVeicUltCarregGUI().carreg();
-        this.telaInicialCPFGUI.getTelaVeicUltCarregGUI().setVisible(true);
-        this.setVisible(false);
+        if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
+            this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+            this.setVisible(false);
+        } else {
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
+            this.setVisible(false);
+        }
 
-    }//GEN-LAST:event_jButtonSimTranspUltCarregActionPerformed
+    }//GEN-LAST:event_jButtonSimClienteUltCarregActionPerformed
 
-    private void jButtonNaoTranspUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNaoTranspUltCarregActionPerformed
+    private void jButtonNaoClienteUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNaoClienteUltCarregActionPerformed
         // TODO add your handling code here:
 
         this.telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
-        this.telaInicialCPFGUI.getDadosCarregTO().setIdTercTransp(null);
-        this.telaInicialCPFGUI.getTelaVeicUltCarregGUI().carreg();
-        this.telaInicialCPFGUI.getTelaVeicUltCarregGUI().setVisible(true);
-        this.setVisible(false);
+        if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
+            this.telaInicialCPFGUI.getTelaListaClienteGUI().setVisible(true);
+            this.setVisible(false);
+        } else {
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
+            this.setVisible(false);
+        }
 
-    }//GEN-LAST:event_jButtonNaoTranspUltCarregActionPerformed
+    }//GEN-LAST:event_jButtonNaoClienteUltCarregActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,20 +273,20 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(TelaTranspUltCarreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaTranspUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(TelaTranspUltCarreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaTranspUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(TelaTranspUltCarreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaTranspUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(TelaTranspUltCarreg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(TelaTranspUltCarregGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new TelaTranspUltCarreg().setVisible(true);
+//                new TelaTranspUltCarregGUI().setVisible(true);
 //            }
 //        });
 //    }
@@ -253,16 +294,22 @@ public class TelaTranspUltCarreg extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCanc;
     private javax.swing.JButton jButtonFechar;
-    private javax.swing.JButton jButtonNaoTranspUltCarreg;
-    private javax.swing.JButton jButtonSimTranspUltCarreg;
+    private javax.swing.JButton jButtonNaoClienteUltCarreg;
+    private javax.swing.JButton jButtonSimClienteUltCarreg;
+    private javax.swing.JLabel jLabelBairro;
+    private javax.swing.JLabel jLabelCidadeUF;
+    private javax.swing.JLabel jLabelCliente;
     private javax.swing.JLabel jLabelPergDadosUltCarreg;
+    private javax.swing.JLabel jLabelRuaNumero;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo2;
-    private javax.swing.JLabel jLabelTransp;
     // End of variables declaration//GEN-END:variables
 
     public void carreg() {
-        jLabelTransp.setText(this.telaInicialCPFGUI.getDadosCarregTO().getNomeTransp());
+        jLabelCliente.setText(this.telaInicialCPFGUI.getDadosCarregTO().getDescrCliente());
+        jLabelRuaNumero.setText(this.telaInicialCPFGUI.getDadosCarregTO().getRuaCliente() + ", " + this.telaInicialCPFGUI.getDadosCarregTO().getNumCliente());
+        jLabelBairro.setText(this.telaInicialCPFGUI.getDadosCarregTO().getBairroCliente() + " - " + this.telaInicialCPFGUI.getDadosCarregTO().getComplCliente());
+        jLabelCidadeUF.setText(this.telaInicialCPFGUI.getDadosCarregTO().getCidadeCliente() + " - " + this.telaInicialCPFGUI.getDadosCarregTO().getEstadoCliente());
     }
 
 }
