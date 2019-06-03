@@ -245,15 +245,9 @@ public class TelaClienteUltCarregGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         this.telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
-        if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
-            this.telaInicialCPFGUI.getTelaListaClienteGUI().setVisible(true);
-            this.setVisible(false);
-        } else {
-            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
-            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
-            this.setVisible(false);
-        }
-
+        this.telaInicialCPFGUI.getTelaListaClienteGUI().setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_jButtonNaoClienteUltCarregActionPerformed
 
     /**

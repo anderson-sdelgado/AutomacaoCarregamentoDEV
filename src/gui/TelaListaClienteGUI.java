@@ -160,8 +160,8 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // TODO add your handling code here:
-        
-                JLabel label = new JLabel("Digite a senha:");
+
+        JLabel label = new JLabel("Digite a senha:");
         JPasswordField jpf = new JPasswordField();
         JOptionPane msg = new JOptionPane(new Object[]{label, jpf}, JOptionPane.OK_CANCEL_OPTION);
         JDialog dlg = msg.createDialog("Password");
@@ -186,7 +186,7 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
         if (senha.equals(senhaPST.retornaSenha())) {
             System.exit(0);
         }
-        
+
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**
@@ -238,9 +238,16 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
         ClienteTO clienteTO = (ClienteTO) clienteList.get(posLista);
         this.telaInicialCPFGUI.getDadosCarregTO().setIdCliente(clienteTO.getIdCliente());
 
-        this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
-        this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
-        this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+        if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
+            this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+            this.setVisible(false);
+        } else {
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
+            this.setVisible(false);
+        }
 
     }
 
