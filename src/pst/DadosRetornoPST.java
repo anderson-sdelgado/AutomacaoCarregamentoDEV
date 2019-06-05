@@ -31,6 +31,10 @@ public class DadosRetornoPST {
             conn = ConnectionPST.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
 
+            if(dadosCarregTO.getIdCliente().trim().equals("0")){
+                dadosCarregTO.setIdCliente(null);
+            }
+            
             System.out.println("dadosCarregTO.getIdProdCarreg() = " + dadosCarregTO.getIdProdCarreg());
             System.out.println("dadosCarregTO.getCpf() = " + dadosCarregTO.getCpf());
             System.out.println("dadosCarregTO.getIdCliente() = " + dadosCarregTO.getIdCliente());

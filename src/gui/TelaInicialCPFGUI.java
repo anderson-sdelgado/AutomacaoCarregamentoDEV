@@ -451,7 +451,7 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
                         dadosCarregTO.setRgMotorista(null);
                         dadosCarregTO.setCnhMotorista(null);
                         dadosCarregTO.setValCnhMotorista(null);
-                        dadosCarregTO.setIdCliente(null);
+                        dadosCarregTO.setIdCliente("0");
                         telaDadosNEncGUI.preenche();
                         telaDadosNEncGUI.setVisible(true);
                         this.setVisible(false);

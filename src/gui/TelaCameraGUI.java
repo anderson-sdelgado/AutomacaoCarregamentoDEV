@@ -313,7 +313,7 @@ public class TelaCameraGUI extends javax.swing.JFrame {
             if (statusCamera == 2) {
                 DadosRetornoPST senhaRetornoPST = new DadosRetornoPST();
                 if (!this.telaInicialCPFGUI.getDadosCarregTO().getIdProdCarreg().equals("5")) {
-                    this.telaInicialCPFGUI.getDadosCarregTO().setIdCliente(null);
+                    this.telaInicialCPFGUI.getDadosCarregTO().setIdCliente("0");
                 }
                 this.telaInicialCPFGUI.setDadosCarregTO(senhaRetornoPST.retDadosCarreg(this.telaInicialCPFGUI.getDadosCarregTO()));
                 BufferedImage image = webcam.getImage();
