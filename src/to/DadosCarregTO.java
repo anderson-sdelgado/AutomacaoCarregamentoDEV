@@ -15,8 +15,8 @@ public class DadosCarregTO extends UltViagemTO {
     private String celular;
     private int confirmaDados;
     private String senha;
-    private String etapa;
-    private String descrStatus;
+    private String idEtapa;
+    private String descrEtapa;
     private String msg;
     private String idCarreg;
     
@@ -55,12 +55,12 @@ public class DadosCarregTO extends UltViagemTO {
         this.senha = senha;
     }
 
-    public String getEtapa() {
-        return etapa;
+    public String getIdEtapa() {
+        return idEtapa;
     }
 
-    public void setEtapa(String etapa) {
-        this.etapa = etapa;
+    public void setIdEtapa(String idEtapa) {
+        this.idEtapa = idEtapa;
     }
 
     public String getMsg() {
@@ -79,12 +79,12 @@ public class DadosCarregTO extends UltViagemTO {
         this.idCarreg = idCarreg;
     }
 
-    public String getDescrStatus() {
-        return descrStatus;
+    public String getDescrEtapa() {
+        return descrEtapa;
     }
 
-    public void setDescrStatus(String descrStatus) {
-        this.descrStatus = descrStatus;
+    public void setDescrEtapa(String descrEtapa) {
+        this.descrEtapa = descrEtapa;
     }
 
     

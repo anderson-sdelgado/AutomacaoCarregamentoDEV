@@ -241,6 +241,7 @@ public class TelaProdutoCarregGUI extends javax.swing.JFrame {
         this.telaInicialCPFGUI.getDadosCarregTO().setIdProdCarreg("5");
         if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
             this.telaInicialCPFGUI.getTelaListaClienteGUI().setVisible(true);
+            this.telaInicialCPFGUI.getTelaListaClienteGUI().preencheLista();
             this.setVisible(false);
         } else {
             this.telaInicialCPFGUI.getTelaClienteUltCarregGUI().carreg();

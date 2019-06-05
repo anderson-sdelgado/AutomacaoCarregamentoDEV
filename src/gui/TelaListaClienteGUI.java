@@ -111,7 +111,7 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
         gridBagConstraints.ipady = 65;
         getContentPane().add(jButtonCanc, gridBagConstraints);
 
-        jListCliente.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jListCliente.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jListCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListClienteMouseClicked(evt);
@@ -129,7 +129,7 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 9;
-        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 200;
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
@@ -244,6 +244,11 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
             this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
             this.setVisible(false);
         } else {
+            
+            if(clienteTO.getIdCliente().equals("0")){
+                this.telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
+            }
+            
             this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
             this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
             this.setVisible(false);
@@ -255,7 +260,7 @@ public class TelaListaClienteGUI extends javax.swing.JFrame {
 
         ClientePST clientePST = new ClientePST();
         clienteList = clientePST.retornaListCliente();
-
+        
         DefaultListModel modelo = new DefaultListModel();
         for (int i = 0; i < clienteList.size(); i++) {
             ClienteTO clienteTO = (ClienteTO) clienteList.get(i);

@@ -235,7 +235,7 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
 
     public void exibir() {
         jLabelSenha.setText(this.telaInicialCPFGUI.getDadosCarregTO().getSenha());
-        jLabelStatus.setText("STATUS: " + this.telaInicialCPFGUI.getDadosCarregTO().getDescrStatus());
+        jLabelStatus.setText("STATUS: " + this.telaInicialCPFGUI.getDadosCarregTO().getDescrEtapa());
         MsgPST msgPST = new MsgPST();
         String tipo;
         if (this.telaInicialCPFGUI.getDadosCarregTO().getIdProdCarreg().equals("1")
@@ -244,7 +244,7 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
         } else {
             tipo = "2";
         }
-        if (Integer.getInteger(this.telaInicialCPFGUI.getDadosCarregTO().getEtapa().trim()) == 2) {
+        if (this.telaInicialCPFGUI.getDadosCarregTO().getIdEtapa().trim().equals("2")) {
             telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
         }
         jLabelMsg.setText(msgPST.retornaMsg(tipo, this.telaInicialCPFGUI.getDadosCarregTO().getConfirmaDados()).replace(".", ".\n").toUpperCase());

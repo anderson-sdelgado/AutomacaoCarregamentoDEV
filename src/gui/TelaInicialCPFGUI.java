@@ -438,8 +438,8 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
 
         if (qtde == 11) {
             String cpfLimpo = textoCPF.replace(".", "").replace("-", "");
-            if (isCPF(cpfLimpo)) {
-//            if (true) {
+//            if (isCPF(cpfLimpo)) {
+            if (true) {
                 UltCarregPST carregPST = new UltCarregPST();
                 ultViagemTO = carregPST.retUltViagem(cpfLimpo);
                 dadosCarregTO = new DadosCarregTO();

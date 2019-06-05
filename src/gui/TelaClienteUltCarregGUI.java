@@ -244,8 +244,9 @@ public class TelaClienteUltCarregGUI extends javax.swing.JFrame {
     private void jButtonNaoClienteUltCarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNaoClienteUltCarregActionPerformed
         // TODO add your handling code here:
 
-        this.telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(0);
+        this.telaInicialCPFGUI.getDadosCarregTO().setConfirmaDados(1);
         this.telaInicialCPFGUI.getTelaListaClienteGUI().setVisible(true);
+        this.telaInicialCPFGUI.getTelaListaClienteGUI().preencheLista();
         this.setVisible(false);
         
     }//GEN-LAST:event_jButtonNaoClienteUltCarregActionPerformed

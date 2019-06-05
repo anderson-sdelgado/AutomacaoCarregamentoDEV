@@ -38,11 +38,11 @@ public class ClientePST {
             conn = ConnectionPST.getInstance().getConnection();
             stmt = conn.createStatement();
             rSet = stmt.executeQuery("SELECT "
-                                            + " CLIENT_ID "
-                                            + " , NOME "
-                                        + " FROM "
-                                            + " USINAS.V_CLIENT_BAGACO "
-                                        + " ORDER BY NOME ASC");
+                    + " CLIENT_ID "
+                    + " , NOME_FANT "
+                    + " FROM "
+                    + " USINAS.V_CLIENT_BAGACO "
+                    + " ORDER BY NOME_FANT ASC");
 
             while (rSet.next()) {
                 ClienteTO clienteTO = new ClienteTO();
@@ -50,6 +50,11 @@ public class ClientePST {
                 clienteTO.setDescrCliente(rSet.getString(2));
                 arrayList.add(clienteTO);
             }
+
+            ClienteTO clienteSOTO = new ClienteTO();
+            clienteSOTO.setIdCliente("0");
+            clienteSOTO.setDescrCliente("NENHUMA DAS OPÇÕES");
+            arrayList.add(clienteSOTO);
 
             try {
                 if (rSet != null) {

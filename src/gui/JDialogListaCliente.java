@@ -98,7 +98,7 @@ public class JDialogListaCliente extends javax.swing.JDialog {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        setBounds(950, 250, 495, 360);
+        setBounds(500, 250, 495, 360);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimActionPerformed

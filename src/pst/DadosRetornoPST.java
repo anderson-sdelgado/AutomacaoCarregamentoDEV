@@ -17,7 +17,7 @@ public class DadosRetornoPST {
 
     public DadosRetornoPST() {
     }
-    
+
     public DadosCarregTO retDadosCarreg(DadosCarregTO dadosCarregTO) {
 
         Connection conn = null;
@@ -30,7 +30,18 @@ public class DadosRetornoPST {
 
             conn = ConnectionPST.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
-            
+
+            System.out.println("dadosCarregTO.getIdProdCarreg() = " + dadosCarregTO.getIdProdCarreg());
+            System.out.println("dadosCarregTO.getCpf() = " + dadosCarregTO.getCpf());
+            System.out.println("dadosCarregTO.getIdCliente() = " + dadosCarregTO.getIdCliente());
+            System.out.println("dadosCarregTO.getCelular() = " + dadosCarregTO.getCelular().replace("-", "").replace("(", "").replace(")", "").replace(" ", ""));
+            System.out.println("dadosCarregTO.getIdTercTransp() = " + dadosCarregTO.getIdTercTransp());
+            System.out.println("dadosCarregTO.getPlaca1() = " + dadosCarregTO.getPlaca1().replace("-", ""));
+            System.out.println("dadosCarregTO.getPlaca2() = " + dadosCarregTO.getPlaca2());
+            System.out.println("dadosCarregTO.getPlaca3() = " + dadosCarregTO.getPlaca3());
+            System.out.println("dadosCarregTO.getConfirmaDados() = " + dadosCarregTO.getConfirmaDados());
+
+
             callableStatement.setString(1, dadosCarregTO.getIdProdCarreg());
             callableStatement.setString(2, dadosCarregTO.getCpf());
             callableStatement.setString(4, dadosCarregTO.getIdCliente());
@@ -49,17 +60,22 @@ public class DadosRetornoPST {
             callableStatement.executeUpdate();
 
             dadosCarregTO.setSenha(callableStatement.getString(10));
-            dadosCarregTO.setEtapa(callableStatement.getString(11));
-            dadosCarregTO.setDescrStatus(callableStatement.getString(12));
+            dadosCarregTO.setIdEtapa(callableStatement.getString(11));
+            dadosCarregTO.setDescrEtapa(callableStatement.getString(12));
             dadosCarregTO.setIdCarreg(callableStatement.getString(13));
             dadosCarregTO.setMsg(callableStatement.getString(14));
-            
 
+            System.out.println("dadosCarregTO.setSenha = " + callableStatement.getString(10));
+            System.out.println("dadosCarregTO.setEtapa = " + callableStatement.getString(11));
+            System.out.println("dadosCarregTO.setDescrStatus = " + callableStatement.getString(12));
+            System.out.println("dadosCarregTO.setIdCarreg = " + callableStatement.getString(13));
+            System.out.println("dadosCarregTO.setMsg = " + callableStatement.getString(14));
+            
         } catch (Exception e) {
             System.out.println("Erro = " + e);
         }
 
         return dadosCarregTO;
     }
-    
+
 }
