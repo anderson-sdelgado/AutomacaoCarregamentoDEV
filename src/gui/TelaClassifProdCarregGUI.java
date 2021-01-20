@@ -52,13 +52,14 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         jButtonClassif1 = new javax.swing.JButton();
         jButtonClassif2 = new javax.swing.JButton();
         jLabelTitulo2 = new javax.swing.JLabel();
+        jButtonClassif3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabelClassifProd.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabelClassifProd.setFont(new java.awt.Font("Tahoma", 0, 32)); // NOI18N
         jLabelClassifProd.setText("Qual a classificação do Produto?");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -116,7 +117,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 120;
+        gridBagConstraints.ipady = 80;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         getContentPane().add(jButtonClassif1, gridBagConstraints);
 
@@ -131,7 +132,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 120;
+        gridBagConstraints.ipady = 80;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         getContentPane().add(jButtonClassif2, gridBagConstraints);
 
@@ -142,6 +143,22 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
         getContentPane().add(jLabelTitulo2, gridBagConstraints);
+
+        jButtonClassif3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonClassif3.setText("AÇÚCAR GRANEL");
+        jButtonClassif3.setActionCommand("jButtonClassif3");
+        jButtonClassif3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClassif3ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.ipady = 80;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        getContentPane().add(jButtonClassif3, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -230,6 +247,24 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonClassif2ActionPerformed
 
+    private void jButtonClassif3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClassif3ActionPerformed
+        // TODO add your handling code here:
+        
+        this.telaInicialCPFGUI.getDadosCarregTO().setIdProdCarreg("7");
+
+        if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
+            this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+            this.setVisible(false);
+        } else {
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
+            this.setVisible(false);
+        } 
+        
+    }//GEN-LAST:event_jButtonClassif3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +304,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCanc;
     private javax.swing.JButton jButtonClassif1;
     private javax.swing.JButton jButtonClassif2;
+    private javax.swing.JButton jButtonClassif3;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JLabel jLabelClassifProd;
     private javax.swing.JLabel jLabelTitulo;
@@ -279,9 +315,12 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         if (this.telaInicialCPFGUI.getDadosCarregTO().getIdProdCarreg().equals("acucar")) {
             jButtonClassif1.setText("AÇÚCAR ENSACADO");
             jButtonClassif2.setText("AÇÚCAR BIG BAG");
+            jButtonClassif3.enable(true);
+            jButtonClassif3.setText("AÇÚCAR GRANEL");
         } else {
             jButtonClassif1.setText("ETANOL HIDRATADO");
             jButtonClassif2.setText("ETANOL ANIDRO");
+            jButtonClassif3.enable(false);
         }
     }
 

@@ -250,8 +250,8 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
         jLabelMsg.setText(msgPST.retornaMsg(tipo, this.telaInicialCPFGUI.getDadosCarregTO().getConfirmaDados()).replace(".", ".\n").toUpperCase());
             jLabelMsg.setLineWrap(true);
         
-        
 //        imprimir();
+        
     }
 
     public void fechaTela() {
@@ -298,6 +298,9 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
             if(!this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")){
                 s.write(tp.textoNormal(this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista()));
             }
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.qrcode(8, this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
             s.write("\n");
             s.write("\n");
             s.write("\n");

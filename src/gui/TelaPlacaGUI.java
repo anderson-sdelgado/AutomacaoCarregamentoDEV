@@ -259,24 +259,19 @@ public class TelaPlacaGUI extends javax.swing.JFrame {
                 qtde++;
                 textoPlaca = textoPlaca + texto;
                 jLabelPlaca.setText(textoPlaca + "-____");
-                JPanelTecladoNum jPanelTecladoNum = new JPanelTecladoNum(this);
-                jPanelTecladoNum.setSize(820, 440);
-                jPanelTecladoNum.setLocation(0, 0);
-
-                jPanelPrincPlaca.removeAll();
-                jPanelPrincPlaca.add(jPanelTecladoNum, BorderLayout.CENTER);
-                jPanelPrincPlaca.revalidate();
-                jPanelPrincPlaca.repaint();
+                chamaTecladoNum();
                 break;
             case 3:
                 qtde++;
                 textoPlaca = textoPlaca + '-' + texto;
                 jLabelPlaca.setText(textoPlaca + "___");
+                chamaTecladoLetraNum();
                 break;
             case 4:
                 qtde++;
                 textoPlaca = textoPlaca + texto;
                 jLabelPlaca.setText(textoPlaca + "__");
+                chamaTecladoNum();
                 break;
             case 5:
                 qtde++;
@@ -309,21 +304,25 @@ public class TelaPlacaGUI extends javax.swing.JFrame {
                 qtde--;
                 textoPlaca = textoPlaca.substring(0, textoPlaca.length() - 1);
                 jLabelPlaca.setText(textoPlaca + "_-____");
+                chamaTecladoLetra();
                 break;
             case 4:
                 qtde--;
                 textoPlaca = textoPlaca.substring(0, textoPlaca.length() - 2);
                 jLabelPlaca.setText(textoPlaca + "-____");
+                chamaTecladoNum();
                 break;
             case 5:
                 qtde--;
                 textoPlaca = textoPlaca.substring(0, textoPlaca.length() - 1);
                 jLabelPlaca.setText(textoPlaca + "___");
+                chamaTecladoLetraNum();
                 break;
             case 6:
                 qtde--;
                 textoPlaca = textoPlaca.substring(0, textoPlaca.length() - 1);
                 jLabelPlaca.setText(textoPlaca + "__");
+                chamaTecladoNum();
                 break;
             case 7:
                 qtde--;
@@ -373,7 +372,29 @@ public class TelaPlacaGUI extends javax.swing.JFrame {
         jPanelPrincPlaca.revalidate();
         jPanelPrincPlaca.repaint();
     }
+    
+    public void chamaTecladoNum() {
+        JPanelTecladoNum jPanelTecladoNum = new JPanelTecladoNum(this);
+        jPanelTecladoNum.setSize(820, 440);
+        jPanelTecladoNum.setLocation(0, 0);
 
+        jPanelPrincPlaca.removeAll();
+        jPanelPrincPlaca.add(jPanelTecladoNum, BorderLayout.CENTER);
+        jPanelPrincPlaca.revalidate();
+        jPanelPrincPlaca.repaint();
+    }
+
+    public void chamaTecladoLetraNum() {
+        JPanelTecladoNumLetra jPanelTecladoNumLetra = new JPanelTecladoNumLetra(this);
+        jPanelTecladoNumLetra.setSize(820, 440);
+        jPanelTecladoNumLetra.setLocation(0, 0);
+
+        jPanelPrincPlaca.removeAll();
+        jPanelPrincPlaca.add(jPanelTecladoNumLetra, BorderLayout.CENTER);
+        jPanelPrincPlaca.revalidate();
+        jPanelPrincPlaca.repaint();
+    }
+    
     public void limpaPlaca() {
         jLabelPlaca.setText("___-____");
         textoPlaca = "";

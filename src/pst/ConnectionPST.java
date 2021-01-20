@@ -24,7 +24,6 @@ public class ConnectionPST {
       public final static String senha   = "FGBNY946";
 
   private Connection connection = null;
-
   private static ConnectionPST instance = null;
 
   private ConnectionPST() {
