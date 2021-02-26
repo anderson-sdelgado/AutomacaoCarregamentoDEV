@@ -129,6 +129,7 @@ public class JDialogDefault extends javax.swing.JDialog {
 
     public void setTxtMsg(String texto){
         jTextArea1.setText(texto);
+        jTextArea1.setLineWrap(true);
     }
 
 }

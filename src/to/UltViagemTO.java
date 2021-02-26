@@ -32,6 +32,7 @@ public class UltViagemTO {
     private String complCliente;
     private String cidadeCliente;
     private String estadoCliente;
+    private String idPreOrdCarreg;
     
     public UltViagemTO() {
     }
@@ -203,7 +204,13 @@ public class UltViagemTO {
     public void setComplCliente(String complCliente) {
         this.complCliente = complCliente;
     }
-    
-    
+
+    public String getIdPreOrdCarreg() {
+        return idPreOrdCarreg;
+    }
+
+    public void setIdPreOrdCarreg(String idPreOrdCarreg) {
+        this.idPreOrdCarreg = idPreOrdCarreg;
+    }
     
 }

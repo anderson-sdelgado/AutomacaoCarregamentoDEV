@@ -51,6 +51,8 @@ public class TelaCameraGUI extends javax.swing.JFrame {
     private int statusCamera; //1 - Entra na Tela; 2 - Tira foto e pausa; 3 - Destrava a camera para tira a foto novamente;
     private JDialogFoto dialog = new JDialogFoto(new javax.swing.JFrame(), true, this);
 
+    private BufferedImage princImage;
+    
     /**
      * Creates new form TelaCameraGUI
      */
@@ -239,9 +241,22 @@ public class TelaCameraGUI extends javax.swing.JFrame {
     private void jButtonCapturarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCapturarFotoActionPerformed
         // TODO add your handling code here:
 
-        statusCamera = 2;
-        panel.pause();
+        try {
+            
+            statusCamera = 2;
+//            panel.pause();
+            
+            princImage = webcam.getImage();
+            
+//            ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
+//            panel.resume();
+            jPanelCamera.removeAll();
+            jPanelCamera.add(new JLabel((new ImageIcon(princImage))));
 
+        } catch (Exception ex) {
+            Logger.getLogger(getName()).log(Level.SEVERE, null, ex);
+        }
+        
         dialog.setVisible(true);
 
     }//GEN-LAST:event_jButtonCapturarFotoActionPerformed
@@ -302,6 +317,10 @@ public class TelaCameraGUI extends javax.swing.JFrame {
     public void descartarFoto() {
         statusCamera = 3;
         panel.resume();
+        
+        jPanelCamera.removeAll();
+        jPanelCamera.add(panel);
+        
     }
 
     public JButton getjButtonCapturarFoto() {
@@ -316,10 +335,18 @@ public class TelaCameraGUI extends javax.swing.JFrame {
                     this.telaInicialCPFGUI.getDadosCarregTO().setIdCliente("0");
                 }
                 this.telaInicialCPFGUI.setDadosCarregTO(senhaRetornoPST.retDadosCarreg(this.telaInicialCPFGUI.getDadosCarregTO()));
+
+                ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
+//                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
+                
                 BufferedImage image = webcam.getImage();
-//                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
-                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
+                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + "_01.gif"));
+//                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + "_01.gif"));
                 panel.resume();
+                
+                jPanelCamera.removeAll();
+                jPanelCamera.add(panel);
+                
                 this.telaInicialCPFGUI.getTelaImprimirSenhaGUI().setFechaTela(false);
                 this.telaInicialCPFGUI.getTelaImprimirSenhaGUI().exibir();
                 this.telaInicialCPFGUI.getTelaImprimirSenhaGUI().setVisible(true);

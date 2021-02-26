@@ -445,8 +445,8 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
                 dadosCarregTO = new DadosCarregTO();
                 dadosCarregTO.setCpf(cpfLimpo);
                 dadosCarregTO.setNomeMotorista(ultViagemTO.getNomeMotorista());
-                if (ultViagemTO.getNomeMotorista().equals("0")) {
-                    if (ultViagemTO.getMsgErro().equals("0")) {
+                if (ultViagemTO.getMsgErro().equals("0")) {
+                    if (ultViagemTO.getNomeMotorista().equals("0")) {
                         dadosCarregTO.setConfirmaDados(0);
                         dadosCarregTO.setRgMotorista(null);
                         dadosCarregTO.setCnhMotorista(null);
@@ -456,34 +456,35 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
                         telaDadosNEncGUI.setVisible(true);
                         this.setVisible(false);
                     } else {
-                        dadosCarregTO.setMsgErro(ultViagemTO.getMsgErro());
-                        telaCamCPreOrdemGUI.preencher();
-                        telaCamCPreOrdemGUI.setVisible(true);
+                        dadosCarregTO.setConfirmaDados(1);
+                        dadosCarregTO.setCapacidade(ultViagemTO.getCapacidade());
+                        dadosCarregTO.setCnhMotorista(ultViagemTO.getCnhMotorista());
+                        dadosCarregTO.setDescrProdCarreg(ultViagemTO.getDescrProdCarreg());
+                        dadosCarregTO.setIdProdCarreg(ultViagemTO.getIdProdCarreg());
+                        dadosCarregTO.setIdTercTransp(ultViagemTO.getIdTercTransp());
+                        dadosCarregTO.setNomeTransp(ultViagemTO.getNomeTransp());
+                        dadosCarregTO.setPlaca1(ultViagemTO.getPlaca1());
+                        dadosCarregTO.setPlaca2(ultViagemTO.getPlaca2());
+                        dadosCarregTO.setPlaca3(ultViagemTO.getPlaca3());
+                        dadosCarregTO.setRgMotorista(ultViagemTO.getRgMotorista());
+                        dadosCarregTO.setValCnhMotorista(ultViagemTO.getValCnhMotorista());
+                        dadosCarregTO.setIdCliente(ultViagemTO.getIdCliente());
+                        dadosCarregTO.setDescrCliente(ultViagemTO.getDescrCliente());
+                        dadosCarregTO.setRuaCliente(ultViagemTO.getRuaCliente());
+                        dadosCarregTO.setNumCliente(ultViagemTO.getNumCliente());
+                        dadosCarregTO.setBairroCliente(ultViagemTO.getBairroCliente());
+                        dadosCarregTO.setComplCliente(ultViagemTO.getComplCliente());
+                        dadosCarregTO.setCidadeCliente(ultViagemTO.getCidadeCliente());
+                        dadosCarregTO.setEstadoCliente(ultViagemTO.getEstadoCliente());
+                        telaDadosUltCarregGUI.carreg();
+                        telaDadosUltCarregGUI.setVisible(true);
                         this.setVisible(false);
                     }
                 } else {
-                    dadosCarregTO.setConfirmaDados(1);
-                    dadosCarregTO.setCapacidade(ultViagemTO.getCapacidade());
-                    dadosCarregTO.setCnhMotorista(ultViagemTO.getCnhMotorista());
-                    dadosCarregTO.setDescrProdCarreg(ultViagemTO.getDescrProdCarreg());
-                    dadosCarregTO.setIdProdCarreg(ultViagemTO.getIdProdCarreg());
-                    dadosCarregTO.setIdTercTransp(ultViagemTO.getIdTercTransp());
-                    dadosCarregTO.setNomeTransp(ultViagemTO.getNomeTransp());
-                    dadosCarregTO.setPlaca1(ultViagemTO.getPlaca1());
-                    dadosCarregTO.setPlaca2(ultViagemTO.getPlaca2());
-                    dadosCarregTO.setPlaca3(ultViagemTO.getPlaca3());
-                    dadosCarregTO.setRgMotorista(ultViagemTO.getRgMotorista());
-                    dadosCarregTO.setValCnhMotorista(ultViagemTO.getValCnhMotorista());
-                    dadosCarregTO.setIdCliente(ultViagemTO.getIdCliente());
-                    dadosCarregTO.setDescrCliente(ultViagemTO.getDescrCliente());
-                    dadosCarregTO.setRuaCliente(ultViagemTO.getRuaCliente());
-                    dadosCarregTO.setNumCliente(ultViagemTO.getNumCliente());
-                    dadosCarregTO.setBairroCliente(ultViagemTO.getBairroCliente());
-                    dadosCarregTO.setComplCliente(ultViagemTO.getComplCliente());
-                    dadosCarregTO.setCidadeCliente(ultViagemTO.getCidadeCliente());
-                    dadosCarregTO.setEstadoCliente(ultViagemTO.getEstadoCliente());
-                    telaDadosUltCarregGUI.carreg();
-                    telaDadosUltCarregGUI.setVisible(true);
+                    dadosCarregTO.setMsgErro(ultViagemTO.getMsgErro());
+                    dadosCarregTO.setIdPreOrdCarreg(ultViagemTO.getIdPreOrdCarreg());
+                    telaCamCPreOrdemGUI.preencher();
+                    telaCamCPreOrdemGUI.setVisible(true);
                     this.setVisible(false);
                 }
             } else {
@@ -843,8 +844,6 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
         this.telaCamCPreOrdemGUI = telaCamCPreOrdemGUI;
     }
 
-    
-    
     public DadosCarregTO getDadosCarregTO() {
         return dadosCarregTO;
     }
@@ -877,7 +876,7 @@ public class TelaInicialCPFGUI extends javax.swing.JFrame {
     }
 
     public boolean isCPF(String CPF) {
-        // considera-se erro CPF's formados por uma sequencia de numeros iguais
+        
         if (CPF.equals("00000000000")
                 || CPF.equals("11111111111")
                 || CPF.equals("22222222222") || CPF.equals("33333333333")

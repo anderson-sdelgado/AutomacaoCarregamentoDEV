@@ -5,17 +5,23 @@
  */
 package gui;
 
+import bo.TCPIP;
+import bo.TP650;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.Timer;
+import pst.ReimpressaoPST;
 import pst.SenhaPST;
 
 /**
@@ -52,6 +58,7 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
         jLabelTitulo2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabelMsg = new javax.swing.JTextArea();
+        jButtonReimpressao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -72,7 +79,7 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 40;
@@ -88,7 +95,7 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 40;
@@ -104,11 +111,11 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 60;
         gridBagConstraints.ipady = 60;
-        gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 150);
         getContentPane().add(jButtonOK, gridBagConstraints);
 
         jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -130,8 +137,26 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
         getContentPane().add(jScrollPane1, gridBagConstraints);
+
+        jButtonReimpressao.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jButtonReimpressao.setText("REIMPRESSÃO");
+        jButtonReimpressao.setActionCommand("jButtonReimpressao");
+        jButtonReimpressao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReimpressaoActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(20, 150, 10, 10);
+        getContentPane().add(jButtonReimpressao, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,6 +210,13 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
+    private void jButtonReimpressaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReimpressaoActionPerformed
+        // TODO add your handling code here:
+        
+        imprimir();
+        
+    }//GEN-LAST:event_jButtonReimpressaoActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -224,6 +256,7 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCanc;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonOK;
+    private javax.swing.JButton jButtonReimpressao;
     private javax.swing.JTextArea jLabelMsg;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelTitulo2;
@@ -231,10 +264,95 @@ public class TelaCamCPreOrdemGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void preencher() {
-//        String texto = this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(" com a ", ".").replace(", produto", ". produto");
-//        jLabelMsg.setText(texto.replace(".", ".\n"));
-            jLabelMsg.setText(this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(".", ".\n").toUpperCase());
-            jLabelMsg.setLineWrap(true);
+        jLabelMsg.setText(this.telaInicialCPFGUI.getDadosCarregTO().getMsgErro().replace(".", ".\n").toUpperCase());
+        jLabelMsg.setLineWrap(true);
+    }
+    
+    private void imprimir() {
+
+        if(!this.telaInicialCPFGUI.getDadosCarregTO().getIdPreOrdCarreg().equals("0")){
+
+            ReimpressaoPST reimpressaoPST = new ReimpressaoPST();
+            this.telaInicialCPFGUI.setDadosCarregTO(reimpressaoPST.retReimpressao(this.telaInicialCPFGUI.getDadosCarregTO()));
+
+//            System.out.println("USINA SANTA FE S.A.");
+//            System.out.println("TICKET DE CARREGAMENTO");
+//            System.out.println(this.telaInicialCPFGUI.getDadosCarregTO().getSenha());
+//            System.out.println("PLACAS: " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca1()
+//                            + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca2()
+//                            + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca3() + "");
+//            System.out.println(this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista());
+
+            if(this.telaInicialCPFGUI.getDadosCarregTO().getMsg().equals("")){
+
+                reimpressaoPST.addReimpressao(this.telaInicialCPFGUI.getDadosCarregTO());
+
+                try {
+                    TCPIP s = new TCPIP();
+                    TP650 tp = new TP650();
+                    s.connect();
+                    s.write(tp.textoNormal(""));
+                    s.write(tp.textoNormal("USINA SANTA FE S.A."));
+                    s.write("\n");
+                    s.write("\n");
+                    s.write(tp.textoNormal("TICKET DE CARREGAMENTO"));
+                    s.write("\n");
+                    s.write(tp.textoNegrito(this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
+                    s.write("\n");
+                    s.write("\n");
+                    s.write(tp.textoNormal("PLACAS: " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca1()
+                                            + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca2()
+                                            + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca3() + ""));
+                    s.write("\n");
+                    if(!this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")){
+                        s.write(tp.textoNormal(this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista()));
+                    }
+                    s.write("\n");
+                    s.write("\n");
+                    s.write(tp.qrcode(8, this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
+                    s.write("\n");
+                    s.write("\n");
+                    s.write("\n");
+                    s.write("\n");
+                    s.write(tp.abreGaveta(0, 4));
+                    s.write("\n\n\n\n");
+                    s.write(tp.cortePapel());
+                    s.close();
+
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaImprimirSenhaGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else{
+                
+                this.telaInicialCPFGUI.getjDialogDefault().setTxtMsg(this.telaInicialCPFGUI.getDadosCarregTO().getMsg());
+                Timer timer = new Timer(4000, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        telaInicialCPFGUI.getjDialogDefault().setVisible(false);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+                this.telaInicialCPFGUI.getjDialogDefault().setVisible(true);
+            
+            }
+            
+        }
+        else{
+            
+            this.telaInicialCPFGUI.getjDialogDefault().setTxtMsg("NÃO CONTÉM NENHUMA PRÉ ORDEM DE CARREGAMENTO PARA ESSE CPF! POR FAVOR, ENTRE EM CONTATO COM O NÚCLEO FISCAL.");
+            Timer timer = new Timer(4000, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    telaInicialCPFGUI.getjDialogDefault().setVisible(false);
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+            this.telaInicialCPFGUI.getjDialogDefault().setVisible(true);
+            
+        }
+        
     }
 
 }

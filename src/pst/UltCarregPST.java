@@ -23,13 +23,14 @@ public class UltCarregPST {
         UltViagemTO ultViagemTO = new UltViagemTO();
         ultViagemTO.setNomeMotorista("0");
         ultViagemTO.setMsgErro("0");
+        ultViagemTO.setIdPreOrdCarreg("0");
         Connection conn = null;
         CallableStatement callableStatement = null;
         String sql = "{call usinas.pk_pre_oc_totem.pb_ult_carreg(?,?,?,?,?,"
                 + "?,?,?,?,?,"
                 + "?,?,?,?,?,"
                 + "?,?,?,?,?,"
-                + "?,?,?,?,?)}";
+                + "?,?,?,?,?,?)}";
 
         try {
 
@@ -61,6 +62,7 @@ public class UltCarregPST {
             callableStatement.registerOutParameter(23, java.sql.Types.VARCHAR);
             callableStatement.registerOutParameter(24, java.sql.Types.VARCHAR);
             callableStatement.registerOutParameter(25, java.sql.Types.VARCHAR);
+            callableStatement.registerOutParameter(26, java.sql.Types.VARCHAR);
             
             callableStatement.executeUpdate();
 
@@ -111,7 +113,11 @@ public class UltCarregPST {
             }
 
             if (callableStatement.getString(25) != null) {
-                ultViagemTO.setMsgErro(callableStatement.getString(25));
+                ultViagemTO.setIdPreOrdCarreg(callableStatement.getString(25));
+            }
+            
+            if (callableStatement.getString(26) != null) {
+                ultViagemTO.setMsgErro(callableStatement.getString(26));
             }
 
         } catch (Exception e) {
