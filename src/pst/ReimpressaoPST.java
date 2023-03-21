@@ -5,6 +5,7 @@
  */
 package pst;
 
+import dbutil.Conn;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import to.DadosCarregTO;
@@ -27,7 +28,7 @@ public class ReimpressaoPST {
         
         try {
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
             
             System.out.println("dadosCarregTO.getIdPreOrdCarreg() = " + dadosCarregTO.getIdPreOrdCarreg());
@@ -96,7 +97,7 @@ public class ReimpressaoPST {
         
         try {
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
             
             System.out.println("dadosCarregTO.getIdPreOrdCarreg() = " + dadosCarregTO.getIdPreOrdCarreg());

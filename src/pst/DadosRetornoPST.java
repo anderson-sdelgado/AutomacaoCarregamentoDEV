@@ -5,6 +5,7 @@
  */
 package pst;
 
+import dbutil.Conn;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import to.DadosCarregTO;
@@ -28,7 +29,7 @@ public class DadosRetornoPST {
 
         try {
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
 
             if(dadosCarregTO.getIdCliente().trim().equals("0")){

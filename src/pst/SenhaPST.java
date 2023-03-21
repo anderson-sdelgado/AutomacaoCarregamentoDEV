@@ -5,6 +5,7 @@
 
 package pst;
 
+import dbutil.Conn;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -37,7 +38,7 @@ public class SenhaPST {
 
             System.gc();
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             stmt = conn.createStatement();
             rSet = stmt.executeQuery("SELECT SENHA FROM INTERFACE.AUTO_PATIO_SENHA");
 

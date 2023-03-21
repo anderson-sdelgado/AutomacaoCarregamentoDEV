@@ -5,6 +5,7 @@
  */
 package pst;
 
+import dbutil.Conn;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +36,7 @@ public class ClientePST {
 
             System.gc();
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             stmt = conn.createStatement();
             rSet = stmt.executeQuery("SELECT "
                     + " CLIENT_ID "

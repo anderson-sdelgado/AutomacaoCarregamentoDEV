@@ -250,7 +250,7 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
         jLabelMsg.setText(msgPST.retornaMsg(tipo, this.telaInicialCPFGUI.getDadosCarregTO().getConfirmaDados()).replace(".", ".\n").toUpperCase());
             jLabelMsg.setLineWrap(true);
         
-        imprimir();
+//        imprimir();
         
     }
 
@@ -287,40 +287,40 @@ public class TelaImprimirSenhaGUI extends javax.swing.JFrame {
                         + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca3() + "");
         System.out.println(this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista());
         
-//        try {
-//            TCPIP s = new TCPIP();
-//            TP650 tp = new TP650();
-//            s.connect();
-//            s.write(tp.textoNormal(""));
-//            s.write(tp.textoNormal("USINA SANTA FE S.A."));
-//            s.write("\n");
-//            s.write("\n");
-//            s.write(tp.textoNormal("TICKET DE CARREGAMENTO"));
-//            s.write("\n");
-//            s.write(tp.textoNegrito(this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
-//            s.write("\n");
-//            s.write("\n");
-//            s.write(tp.textoNormal("PLACAS: " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca1()
-//                                    + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca2()
-//                                    + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca3() + ""));
-//            s.write("\n");
-//            if(!this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")){
-//                s.write(tp.textoNormal(this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista()));
-//            }
-//            s.write("\n");
-//            s.write("\n");
-//            s.write(tp.qrcode(8, this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
-//            s.write("\n");
-//            s.write("\n");
-//            s.write("\n");
-//            s.write("\n");
-//            s.write(tp.abreGaveta(0, 4));
-//            s.write("\n\n\n\n");
-//            s.write(tp.cortePapel());
-//            s.close();
-//        } catch (IOException ex) {
-//            Logger.getLogger(TelaImprimirSenhaGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            TCPIP s = new TCPIP();
+            TP650 tp = new TP650();
+            s.connect();
+            s.write(tp.textoNormal(""));
+            s.write(tp.textoNormal("USINA SANTA FE S.A."));
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.textoNormal("TICKET DE CARREGAMENTO"));
+            s.write("\n");
+            s.write(tp.textoNegrito(this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.textoNormal("PLACAS: " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca1()
+                                    + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca2()
+                                    + " | " + this.telaInicialCPFGUI.getDadosCarregTO().getPlaca3() + ""));
+            s.write("\n");
+            if(!this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")){
+                s.write(tp.textoNormal(this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista()));
+            }
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.qrcode(8, this.telaInicialCPFGUI.getDadosCarregTO().getSenha()));
+            s.write("\n");
+            s.write("\n");
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.abreGaveta(0, 4));
+            s.write("\n\n\n\n");
+            s.write(tp.cortePapel());
+            s.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaImprimirSenhaGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

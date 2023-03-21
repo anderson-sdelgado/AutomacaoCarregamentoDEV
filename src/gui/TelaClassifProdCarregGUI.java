@@ -53,6 +53,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         jButtonClassif2 = new javax.swing.JButton();
         jLabelTitulo2 = new javax.swing.JLabel();
         jButtonClassif3 = new javax.swing.JButton();
+        jButtonClassif4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,6 +65,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
         getContentPane().add(jLabelClassifProd, gridBagConstraints);
 
@@ -82,7 +84,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 40;
@@ -98,7 +100,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipadx = 40;
@@ -118,7 +120,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.ipady = 80;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 10);
         getContentPane().add(jButtonClassif1, gridBagConstraints);
 
         jButtonClassif2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -129,11 +131,11 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.ipady = 80;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
         getContentPane().add(jButtonClassif2, gridBagConstraints);
 
         jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -145,7 +147,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         getContentPane().add(jLabelTitulo2, gridBagConstraints);
 
         jButtonClassif3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonClassif3.setText("AÇÚCAR GRANEL");
+        jButtonClassif3.setText("AÇÚCAR");
         jButtonClassif3.setActionCommand("jButtonClassif3");
         jButtonClassif3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,11 +156,26 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 80;
         gridBagConstraints.ipady = 80;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 10);
         getContentPane().add(jButtonClassif3, gridBagConstraints);
+
+        jButtonClassif4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonClassif4.setText("ETANOL");
+        jButtonClassif4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClassif4ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.ipady = 80;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 0);
+        getContentPane().add(jButtonClassif4, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -265,6 +282,25 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonClassif3ActionPerformed
 
+    private void jButtonClassif4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClassif4ActionPerformed
+        // TODO add your handling code here:
+        
+        this.telaInicialCPFGUI.getDadosCarregTO().setIdProdCarreg("8");
+
+        if (this.telaInicialCPFGUI.getDadosCarregTO().getNomeMotorista().equals("0")) {
+            this.telaInicialCPFGUI.getTelaPlacaGUI().limpaPlaca();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().chamaTecladoLetra();
+            this.telaInicialCPFGUI.getTelaPlacaGUI().setVisible(true);
+            this.setVisible(false);
+        } else {
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().carreg();
+            this.telaInicialCPFGUI.getTelaTranspUltCarregGUI().setVisible(true);
+            this.setVisible(false);
+        } 
+        
+        
+    }//GEN-LAST:event_jButtonClassif4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -305,6 +341,7 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonClassif1;
     private javax.swing.JButton jButtonClassif2;
     private javax.swing.JButton jButtonClassif3;
+    private javax.swing.JButton jButtonClassif4;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JLabel jLabelClassifProd;
     private javax.swing.JLabel jLabelTitulo;
@@ -317,10 +354,13 @@ public class TelaClassifProdCarregGUI extends javax.swing.JFrame {
             jButtonClassif2.setText("AÇÚCAR BIG BAG");
             jButtonClassif3.enable(true);
             jButtonClassif3.setText("AÇÚCAR GRANEL");
+            jButtonClassif4.enable(true);
+            jButtonClassif4.setText("AÇUCAR CONTAINER");
         } else {
             jButtonClassif1.setText("ETANOL HIDRATADO");
             jButtonClassif2.setText("ETANOL ANIDRO");
             jButtonClassif3.enable(false);
+            jButtonClassif4.enable(false);
         }
     }
 

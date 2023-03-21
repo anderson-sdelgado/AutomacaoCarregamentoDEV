@@ -5,6 +5,7 @@
  */
 package pst;
 
+import dbutil.Conn;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import to.UltViagemTO;
@@ -34,7 +35,7 @@ public class UltCarregPST {
 
         try {
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
 
             callableStatement.setString(1, cpf);

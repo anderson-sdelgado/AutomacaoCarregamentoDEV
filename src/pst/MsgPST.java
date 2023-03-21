@@ -5,6 +5,7 @@
  */
 package pst;
 
+import dbutil.Conn;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +33,7 @@ public class MsgPST {
 
             System.gc();
 
-            conn = ConnectionPST.getInstance().getConnection();
+            conn = Conn.getInstance().getConnection();
             stmt = conn.createStatement();
             rSet = stmt.executeQuery("SELECT MSG FROM INTERFACE.AUTO_PATIO_MSG WHERE TIPO_PRODUTO = " + tipo + " AND CONFIRMACAO = " + confirmacao);
 
