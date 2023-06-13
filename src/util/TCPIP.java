@@ -24,7 +24,7 @@ public class TCPIP {
 
     public void connect() {
         try {
-            socketCliente = new Socket("192.168.5.5", 9100);
+            socketCliente = new Socket("192.168.5.56", 9100);
 //            socketCliente = new Socket("192.168.5.6", 9100);
 //            socketCliente = new Socket("192.168.0.22", 9100);
             sin = socketCliente.getInputStream();

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+import util.Const;
 
 /**
  *
@@ -33,7 +34,6 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         jLabelCPF.setText("___.___.___-__");
         this.baseJFrame.getAutomacaoCTR().setQtde(0);
         this.baseJFrame.getAutomacaoCTR().setTextoCPF("");
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setCpf("");
     }
 
     /**
@@ -46,7 +46,7 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanelPrincipal = new javax.swing.JPanel();
         jLabelMsg = new javax.swing.JLabel();
         jLabelCPF = new javax.swing.JLabel();
         jButtonNum1 = new javax.swing.JButton();
@@ -62,29 +62,31 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         jButtonNum9 = new javax.swing.JButton();
         jButtonOk = new javax.swing.JButton();
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setOpaque(false);
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanelPrincipal.setMaximumSize(new java.awt.Dimension(1366, 768));
+        jPanelPrincipal.setOpaque(false);
+        jPanelPrincipal.setLayout(new java.awt.GridBagLayout());
 
-        jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelMsg.setForeground(new java.awt.Color(255, 255, 255));
         jLabelMsg.setText("Por Favor, digite seu CPF");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 6;
-        jPanel1.add(jLabelMsg, gridBagConstraints);
+        jPanelPrincipal.add(jLabelMsg, gridBagConstraints);
 
-        jLabelCPF.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabelCPF.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelCPF.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCPF.setText("___.___.___-__");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 30, 0);
-        jPanel1.add(jLabelCPF, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        jPanelPrincipal.add(jLabelCPF, gridBagConstraints);
 
         jButtonNum1.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -101,8 +103,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 80, 10, 0);
-        jPanel1.add(jButtonNum1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 80, 5, 0);
+        jPanelPrincipal.add(jButtonNum1, gridBagConstraints);
 
         jButtonNum2.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -119,8 +121,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 40, 10, 20);
-        jPanel1.add(jButtonNum2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 5, 20);
+        jPanelPrincipal.add(jButtonNum2, gridBagConstraints);
 
         jButtonNum3.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -137,8 +139,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 80);
-        jPanel1.add(jButtonNum3, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 80);
+        jPanelPrincipal.add(jButtonNum3, gridBagConstraints);
 
         jButtonNum4.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum4.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -155,8 +157,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 80, 10, 0);
-        jPanel1.add(jButtonNum4, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 80, 5, 0);
+        jPanelPrincipal.add(jButtonNum4, gridBagConstraints);
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -173,8 +175,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 80, 10, 0);
-        jPanel1.add(jButton7, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 80, 5, 0);
+        jPanelPrincipal.add(jButton7, gridBagConstraints);
 
         jButtonCorrige.setBackground(new java.awt.Color(255, 255, 255));
         jButtonCorrige.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -191,8 +193,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 15;
         gridBagConstraints.ipady = 85;
-        gridBagConstraints.insets = new java.awt.Insets(10, 80, 10, 0);
-        jPanel1.add(jButtonCorrige, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 80, 5, 0);
+        jPanelPrincipal.add(jButtonCorrige, gridBagConstraints);
 
         jButtonNum5.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum5.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -209,8 +211,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 40, 10, 20);
-        jPanel1.add(jButtonNum5, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 20);
+        jPanelPrincipal.add(jButtonNum5, gridBagConstraints);
 
         jButtonNum8.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum8.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -227,8 +229,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 40, 10, 20);
-        jPanel1.add(jButtonNum8, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 20);
+        jPanelPrincipal.add(jButtonNum8, gridBagConstraints);
 
         jButton0.setBackground(new java.awt.Color(255, 255, 255));
         jButton0.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -245,8 +247,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 40, 10, 20);
-        jPanel1.add(jButton0, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 20);
+        jPanelPrincipal.add(jButton0, gridBagConstraints);
 
         jButtonNum6.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum6.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -263,8 +265,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 80);
-        jPanel1.add(jButtonNum6, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 80);
+        jPanelPrincipal.add(jButtonNum6, gridBagConstraints);
 
         jButtonNum9.setBackground(new java.awt.Color(255, 255, 255));
         jButtonNum9.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -281,8 +283,8 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 80);
-        jPanel1.add(jButtonNum9, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 80);
+        jPanelPrincipal.add(jButtonNum9, gridBagConstraints);
 
         jButtonOk.setBackground(new java.awt.Color(255, 255, 255));
         jButtonOk.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -299,10 +301,10 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.ipady = 60;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 80);
-        jPanel1.add(jButtonOk, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 80);
+        jPanelPrincipal.add(jButtonOk, gridBagConstraints);
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        add(jPanelPrincipal, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNum1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNum1ActionPerformed
@@ -393,19 +395,20 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButtonOk;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelMsg;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelPrincipal;
     // End of variables declaration//GEN-END:variables
 
     public void ok() {
         switch (this.baseJFrame.getAutomacaoCTR().okCPF()) {
-            case "TelaDadosNEnc":
-                this.baseJFrame.mudarTela("TelaDadosNEncJPanel");
+            case Const.TELA_MOTO_NAO_ENC:
+                this.baseJFrame.mudarTela(Const.TELA_MOTO_NAO_ENC);
                 break;
-            case "TelaDadosUltCarreg":
-                this.baseJFrame.mudarTela("TelaDadosUltCarregJPanel");
+            case Const.TELA_ULT_DADOS_CARREG_MOTO:
+                this.baseJFrame.mudarTela(Const.TELA_ULT_DADOS_CARREG_MOTO);
                 break;
-            case "TelaCamCPreOrdem":
-                this.baseJFrame.mudarTela("TelaCamCPreOrdemJPanel");
+
+            case Const.TELA_REIMPRIMIR:
+                this.baseJFrame.mudarTela(Const.TELA_REIMPRIMIR);
                 break;
             case "CPF INVÁLIDO":
                 cpfInvalido();

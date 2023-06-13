@@ -19,8 +19,9 @@ public class ReimpressaoPST {
     public ReimpressaoPST() {
     }
     
-    public DadosCarregBean retReimpressao(DadosCarregBean dadosCarregTO) {
+    public DadosCarregBean retReimpressao(String idPreOrdCarreg) {
 
+        DadosCarregBean dadosCarregBean = new DadosCarregBean();
         Connection conn = null;
         CallableStatement callableStatement = null;
         String sql = "{call usinas.pk_pre_oc_totem.pb_perm_reimpressao(?,?,?,"
@@ -31,9 +32,9 @@ public class ReimpressaoPST {
             conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
             
-            System.out.println("dadosCarregTO.getIdPreOrdCarreg() = " + dadosCarregTO.getIdPreOrdCarreg());
+            System.out.println("dadosCarregTO.getIdPreOrdCarreg() = " + idPreOrdCarreg);
 
-            callableStatement.setInt(1, Integer.parseInt(dadosCarregTO.getIdPreOrdCarreg()));
+            callableStatement.setInt(1, Integer.parseInt(idPreOrdCarreg));
             callableStatement.registerOutParameter(2, java.sql.Types.VARCHAR);
             callableStatement.registerOutParameter(3, java.sql.Types.VARCHAR);
             callableStatement.registerOutParameter(4, java.sql.Types.VARCHAR);
@@ -42,37 +43,38 @@ public class ReimpressaoPST {
             callableStatement.registerOutParameter(7, java.sql.Types.VARCHAR);
 
             callableStatement.executeUpdate();
-
-            dadosCarregTO.setPlaca1(callableStatement.getString(2));
+            
+            dadosCarregBean.setIdCarreg(idPreOrdCarreg);
+            dadosCarregBean.setPlaca1(callableStatement.getString(2));
             
             if (callableStatement.getString(3) == null) {
-                dadosCarregTO.setPlaca2("");
+                dadosCarregBean.setPlaca2("");
             }
             else{
-                dadosCarregTO.setPlaca2(callableStatement.getString(3));
+                dadosCarregBean.setPlaca2(callableStatement.getString(3));
             }
             
             if (callableStatement.getString(4) == null) {
-                dadosCarregTO.setPlaca3("");
+                dadosCarregBean.setPlaca3("");
             }
             else{
-                dadosCarregTO.setPlaca3(callableStatement.getString(4));
+                dadosCarregBean.setPlaca3(callableStatement.getString(4));
             }
             
             if (callableStatement.getString(5) != null) {
-                dadosCarregTO.setNomeMotorista(callableStatement.getString(5));
+                dadosCarregBean.setNomeMotorista(callableStatement.getString(5));
             }
             else{
-                dadosCarregTO.setNomeMotorista("0");
+                dadosCarregBean.setNomeMotorista("0");
             }
             
-            dadosCarregTO.setSenha(callableStatement.getString(6));
+            dadosCarregBean.setSenha(callableStatement.getString(6));
             
             if (callableStatement.getString(7) == null) {
-                dadosCarregTO.setMsg("");
+                dadosCarregBean.setMsg("");
             }
             else{
-                dadosCarregTO.setMsg(callableStatement.getString(7));
+                dadosCarregBean.setMsg(callableStatement.getString(7));
             }
             
             System.out.println("dadosCarregTO.setPlaca1 = " + callableStatement.getString(2));
@@ -86,7 +88,7 @@ public class ReimpressaoPST {
             System.out.println("Erro = " + e);
         }
 
-        return dadosCarregTO;
+        return dadosCarregBean;
     }
     
     public void addReimpressao(DadosCarregBean dadosCarregTO) {

@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import persistence.DadosRetornoPST;
+import util.Const;
 
 /**
  *
@@ -34,10 +34,10 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
     private final BaseJFrame baseJFrame;
     private FotoJDialog dialog;
 
-    private Executor executor = Executors.newSingleThreadExecutor();
-    private AtomicBoolean initialized = new AtomicBoolean(false);
-    private Webcam webcam = null;
-    private WebcamPanel panel = null;
+//    private Executor executor = Executors.newSingleThreadExecutor();
+//    private AtomicBoolean initialized = new AtomicBoolean(false);
+//    private Webcam webcam = null;
+//    private WebcamPanel panel = null;
     private int statusCamera; //1 - Entra na Tela; 2 - Tira foto e pausa; 3 - Destrava a camera para tira a foto novamente;
     private BufferedImage princImage;
 
@@ -52,22 +52,8 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
 
         dialog = new FotoJDialog(new javax.swing.JFrame(), true, this);
         statusCamera = 1;        
-        webcam = Webcam.getDefault();
-        webcam.setViewSize(WebcamResolution.VGA.getSize());
-        panel = new WebcamPanel(webcam, false);
-        panel.setPreferredSize(webcam.getViewSize());
-        panel.setOpaque(true);
-        panel.setBackground(Color.BLACK);
-        panel.setBounds(0, 0, 640, 480);
-        jPanelCamera.add(panel);
-        if (initialized.compareAndSet(false, true)) {
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    panel.start();
-                }
-            });
-        }
+
+        jPanelCamera.add(this.baseJFrame.getAutomacaoCTR().getWebcamPanel());
 
     }
 
@@ -103,7 +89,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.weighty = -20.0;
         add(jButtonCancelar, gridBagConstraints);
 
@@ -120,7 +106,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 40;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.weighty = -20.0;
         add(jButtonRetornar, gridBagConstraints);
 
@@ -130,7 +116,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(jLabelMsg, gridBagConstraints);
 
         javax.swing.GroupLayout jPanelCameraLayout = new javax.swing.GroupLayout(jPanelCamera);
@@ -164,15 +150,14 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 40;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(jButtonCapturarFoto, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
 
-        webcam.close();
-        this.baseJFrame.mudarTela("TelaCPFJPanel");
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -184,7 +169,6 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
 
     private void jButtonRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetornarActionPerformed
 
-        webcam.close();
         this.baseJFrame.retornarTela();
         
     }//GEN-LAST:event_jButtonRetornarActionPerformed
@@ -200,7 +184,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
 
     private void capturar() {
         statusCamera = 2;
-        princImage = webcam.getImage();
+        princImage = this.baseJFrame.getAutomacaoCTR().getWebcam().getImage();
         jPanelCamera.removeAll();
         jPanelCamera.add(new JLabel((new ImageIcon(princImage))));
         dialog.setVisible(true);
@@ -208,11 +192,9 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
 
     public void descartarFoto() {
         statusCamera = 3;
-        panel.resume();
-
+        this.baseJFrame.getAutomacaoCTR().getWebcamPanel().resume();
         jPanelCamera.removeAll();
-        jPanelCamera.add(panel);
-
+        jPanelCamera.add(this.baseJFrame.getAutomacaoCTR().getWebcamPanel());
     }
 
     public void salvarFoto() {
@@ -220,21 +202,22 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         if (statusCamera == 2) {
 
             try {
-                this.baseJFrame.getAutomacaoCTR().atualizarDadosRetorno();
-
+                
+                this.baseJFrame.getAutomacaoCTR().salvarDadosCarreg();
+                
                 ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getIdCarreg() + ".gif"));
 //                ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
 
-                BufferedImage image = webcam.getImage();
+                BufferedImage image = this.baseJFrame.getAutomacaoCTR().getWebcam().getImage();
                 ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getIdCarreg() + "_01.gif"));
 //                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + "_01.gif"));
-                panel.resume();
+                this.baseJFrame.getAutomacaoCTR().getWebcamPanel().resume();
 
                 jPanelCamera.removeAll();
-                jPanelCamera.add(panel);
+                jPanelCamera.add(this.baseJFrame.getAutomacaoCTR().getWebcamPanel());
                 
-                webcam.close();
-                this.baseJFrame.mudarTela("TelaImprimirSenhaJPanel");
+                this.baseJFrame.getAutomacaoCTR().getWebcamPanel().resume();
+                this.baseJFrame.mudarTela(Const.TELA_IMPRIMIR_SENHA);
 
             } catch (Exception ex) {
                 Logger.getLogger(getName()).log(Level.SEVERE, null, ex);

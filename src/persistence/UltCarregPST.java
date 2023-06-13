@@ -8,7 +8,7 @@ package persistence;
 import dbutil.Conn;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import bean.UltViagemBean;
+import bean.UltCarregBean;
 
 /**
  *
@@ -19,12 +19,12 @@ public class UltCarregPST {
     public UltCarregPST() {
     }
 
-    public UltViagemBean retUltViagem(String cpf) {
+    public UltCarregBean retUltViagem(String cpf) {
 
-        UltViagemBean ultViagemTO = new UltViagemBean();
-        ultViagemTO.setNomeMotorista("0");
-        ultViagemTO.setMsgErro("0");
-        ultViagemTO.setIdPreOrdCarreg("0");
+        UltCarregBean ultCarregBean = new UltCarregBean();
+        ultCarregBean.setNomeMotorista("-");
+        ultCarregBean.setMsgErro("0");
+        ultCarregBean.setIdPreOrdCarreg("0");
         Connection conn = null;
         CallableStatement callableStatement = null;
         String sql = "{call usinas.pk_pre_oc_totem.pb_ult_carreg(?,?,?,?,?,"
@@ -69,63 +69,63 @@ public class UltCarregPST {
 
             if (callableStatement.getString(3) != null) {
 
-                ultViagemTO.setNomeMotorista(callableStatement.getString(3));
-                ultViagemTO.setRgMotorista(callableStatement.getString(4));
-                ultViagemTO.setCnhMotorista(callableStatement.getString(5));
-                ultViagemTO.setValCnhMotorista(callableStatement.getString(6));
+                ultCarregBean.setNomeMotorista(callableStatement.getString(3));
+                ultCarregBean.setRgMotorista(callableStatement.getString(4));
+                ultCarregBean.setCnhMotorista(callableStatement.getString(5));
+                ultCarregBean.setValCnhMotorista(callableStatement.getString(6));
                 
-                ultViagemTO.setIdCliente(callableStatement.getString(8));
-                ultViagemTO.setDescrCliente(callableStatement.getString(9));
-                ultViagemTO.setRuaCliente(callableStatement.getString(10));
-                ultViagemTO.setNumCliente(callableStatement.getString(11));
-                ultViagemTO.setBairroCliente(callableStatement.getString(12));
+                ultCarregBean.setIdCliente(callableStatement.getString(8));
+                ultCarregBean.setDescrCliente(callableStatement.getString(9));
+                ultCarregBean.setRuaCliente(callableStatement.getString(10));
+                ultCarregBean.setNumCliente(callableStatement.getString(11));
+                ultCarregBean.setBairroCliente(callableStatement.getString(12));
                 if (callableStatement.getString(13) == null) {
-                    ultViagemTO.setComplCliente("");
+                    ultCarregBean.setComplCliente("");
                 }else{
-                    ultViagemTO.setComplCliente(callableStatement.getString(13));
+                    ultCarregBean.setComplCliente(callableStatement.getString(13));
                 }
-                ultViagemTO.setCidadeCliente(callableStatement.getString(14));
-                ultViagemTO.setEstadoCliente(callableStatement.getString(15));
+                ultCarregBean.setCidadeCliente(callableStatement.getString(14));
+                ultCarregBean.setEstadoCliente(callableStatement.getString(15));
                 
-                ultViagemTO.setNomeTransp(callableStatement.getString(17));
-                ultViagemTO.setIdTercTransp(callableStatement.getString(18));
-                ultViagemTO.setIdProdCarreg(callableStatement.getString(19));
-                ultViagemTO.setDescrProdCarreg(callableStatement.getString(20));
-                ultViagemTO.setPlaca1(callableStatement.getString(21));
+                ultCarregBean.setNomeTransp(callableStatement.getString(17));
+                ultCarregBean.setIdTercTransp(callableStatement.getString(18));
+                ultCarregBean.setIdProdCarreg(callableStatement.getString(19));
+                ultCarregBean.setDescrProdCarreg(callableStatement.getString(20));
+                ultCarregBean.setPlaca1(callableStatement.getString(21));
                 if (callableStatement.getString(22) == null) {
-                    ultViagemTO.setPlaca2("");
+                    ultCarregBean.setPlaca2("");
                 }
                 else{
-                    ultViagemTO.setPlaca2(callableStatement.getString(22));
+                    ultCarregBean.setPlaca2(callableStatement.getString(22));
                 }
                 if (callableStatement.getString(23) == null) {
-                    ultViagemTO.setPlaca3("");
+                    ultCarregBean.setPlaca3("");
                 }
                 else{
-                    ultViagemTO.setPlaca3(callableStatement.getString(23));
+                    ultCarregBean.setPlaca3(callableStatement.getString(23));
                 }
                 if (callableStatement.getString(24) == null) {
-                    ultViagemTO.setCapacidade("");
+                    ultCarregBean.setCapacidade("");
                 }
                 else{
-                    ultViagemTO.setCapacidade(callableStatement.getString(24));
+                    ultCarregBean.setCapacidade(callableStatement.getString(24));
                 }
                 
             }
 
             if (callableStatement.getString(25) != null) {
-                ultViagemTO.setIdPreOrdCarreg(callableStatement.getString(25));
+                ultCarregBean.setIdPreOrdCarreg(callableStatement.getString(25));
             }
             
             if (callableStatement.getString(26) != null) {
-                ultViagemTO.setMsgErro(callableStatement.getString(26));
+                ultCarregBean.setMsgErro(callableStatement.getString(26));
             }
 
         } catch (Exception e) {
             System.out.println("Erro = " + e);
         }
 
-        return ultViagemTO;
+        return ultCarregBean;
     }
 
 }

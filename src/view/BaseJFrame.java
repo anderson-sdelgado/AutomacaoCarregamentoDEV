@@ -5,6 +5,7 @@
 package view;
 
 import control.AutomacaoCTR;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Insets;
@@ -15,12 +16,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import util.Const;
 
 /**
  *
  * @author anderson
  */
-public class BaseJFrame extends javax.swing.JFrame {
+public final class BaseJFrame extends javax.swing.JFrame {
 
     private AutomacaoCTR automacaoCTR;
     private ArrayList<String> telas;
@@ -28,113 +30,106 @@ public class BaseJFrame extends javax.swing.JFrame {
     public BaseJFrame() {
 
         automacaoCTR = new AutomacaoCTR();
+        automacaoCTR.imprimirTeste();
+//        telaInicial();
+    }
 
+    private void telaInicial() {
+        automacaoCTR.abrirCamera();
         TelaCPFJPanel telaCPFPanel = new TelaCPFJPanel(this);
-        this.getContentPane().add(telaCPFPanel);
-//        TelaCameraJPanel telaCameraJPanel = new TelaCameraJPanel(this);;
-//        this.getContentPane().add(telaCameraJPanel);
-
+        this.add(telaCPFPanel);
         telas = new ArrayList<>();
-        telas.add("TelaCPFJPanel");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-
+        telas.add(Const.TELA_CPF);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setUndecorated(true);
+        this.setVisible(true);
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        this.pack();
     }
 
     public void mudarTela(String telaProxima) {
-        if (telaProxima.equals("TelaCPFJPanel")) {
+        if (telaProxima.equals(Const.TELA_CPF)) {
             telas.clear();
         }
         telas.add(telaProxima);
+        this.getContentPane().removeAll();
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         tela(telaProxima);
+        this.pack();
     }
 
     public void retornarTela() {
         telas.remove(telas.size() - 1);
+        this.getContentPane().removeAll();
+        this.getContentPane().revalidate();
+        this.getContentPane().repaint();
         tela(telas.get(telas.size() - 1));
+        this.pack();
     }
 
     private void tela(String telaProxima) {
-        this.getContentPane().removeAll();
+        this.pack();
         switch (telaProxima) {
-            case "TelaCPFJPanel":
+            case Const.TELA_CPF:
                 TelaCPFJPanel telaCPFJPanel = new TelaCPFJPanel(this);
                 this.getContentPane().add(telaCPFJPanel);
-                this.pack();
                 break;
-            case "TelaCamCPreOrdemJPanel":
-                TelaCamCPreOrdemJPanel telaCamCPreOrdemJPanel = new TelaCamCPreOrdemJPanel(this);
+            case Const.TELA_REIMPRIMIR:
+                TelaReimprimirJPanel telaCamCPreOrdemJPanel = new TelaReimprimirJPanel(this);
                 this.getContentPane().add(telaCamCPreOrdemJPanel);
-                this.pack();
                 break;
-            case "TelaCameraJPanel":
+            case Const.TELA_CAMERA:
                 TelaCameraJPanel telaCameraJPanel = new TelaCameraJPanel(this);
                 this.getContentPane().add(telaCameraJPanel);
-                this.pack();
                 break;
-            case "TelaClassifProdCarregJPanel":
+            case Const.TELA_CLASSIF_PROD_CARREG:
                 TelaClassifProdCarregJPanel telaClassifProdCarregJPanel = new TelaClassifProdCarregJPanel(this);
                 this.getContentPane().add(telaClassifProdCarregJPanel);
-                this.pack();
                 break;
-            case "TelaClienteUltCarregJPanel":
-                TelaClienteUltCarregJPanel telaClienteUltCarregJPanel = new TelaClienteUltCarregJPanel(this);
+            case Const.TELA_ULT_CLIENTE_CARREG:
+                TelaUltClienteCarregJPanel telaClienteUltCarregJPanel = new TelaUltClienteCarregJPanel(this);
                 this.getContentPane().add(telaClienteUltCarregJPanel);
-                this.pack();
                 break;
-            case "TelaDadosNEncJPanel":
-                TelaDadosNEncJPanel telaDadosNEncJPanel = new TelaDadosNEncJPanel(this);
+            case Const.TELA_MOTO_NAO_ENC:
+                TelaMotoNaoEncJPanel telaDadosNEncJPanel = new TelaMotoNaoEncJPanel(this);
                 this.getContentPane().add(telaDadosNEncJPanel);
-                this.pack();
                 break;
-            case "TelaDadosUltCarregJPanel":
-                TelaDadosUltCarregJPanel telaDadosUltCarregJPanel = new TelaDadosUltCarregJPanel(this);
+            case Const.TELA_ULT_DADOS_CARREG_MOTO:
+                TelaUltDadosCarregMotoJPanel telaDadosUltCarregJPanel = new TelaUltDadosCarregMotoJPanel(this);
                 this.getContentPane().add(telaDadosUltCarregJPanel);
-                this.pack();
                 break;
-            case "TelaImprimirSenhaJPanel":
+            case Const.TELA_IMPRIMIR_SENHA:
                 TelaImprimirSenhaJPanel telaImprimirSenhaJPanel = new TelaImprimirSenhaJPanel(this);
                 this.getContentPane().add(telaImprimirSenhaJPanel);
-                this.pack();
                 break;
-            case "TelaListaClienteJPanel":
+            case Const.TELA_LISTA_CLIENTE:
                 TelaListaClienteJPanel telaListaClienteJPanel = new TelaListaClienteJPanel(this);
                 this.getContentPane().add(telaListaClienteJPanel);
-                this.pack();
                 break;
-            case "TelaPlacaJPanel":
+            case Const.TELA_PLACA:
                 TelaPlacaJPanel telaPlacaJPanel = new TelaPlacaJPanel(this);
                 this.getContentPane().add(telaPlacaJPanel);
-                this.pack();
                 break;
-            case "TelaProdutoCarregJPanel":
+            case Const.TELA_PRODUTO_CARREG:
                 TelaProdutoCarregJPanel telaProdutoCarregJPanel = new TelaProdutoCarregJPanel(this);
                 this.getContentPane().add(telaProdutoCarregJPanel);
-                this.pack();
                 break;
-            case "TelaProdutoUltCarregJPanel":
-                TelaProdutoUltCarregJPanel telaProdutoUltCarregJPanel = new TelaProdutoUltCarregJPanel(this);
+            case Const.TELA_ULT_PRODUTO_CARREG:
+                TelaUltProdutoCarregJPanel telaProdutoUltCarregJPanel = new TelaUltProdutoCarregJPanel(this);
                 this.getContentPane().add(telaProdutoUltCarregJPanel);
-                this.pack();
                 break;
-            case "TelaTranspUltCarregJPanel":
-                TelaTranspUltCarregJPanel telaTranspUltCarregJPanel = new TelaTranspUltCarregJPanel(this);
+            case Const.TELA_ULT_TRANSP_CARREG:
+                TelaUltTranspCarregJPanel telaTranspUltCarregJPanel = new TelaUltTranspCarregJPanel(this);
                 this.getContentPane().add(telaTranspUltCarregJPanel);
-                this.pack();
                 break;
-            case "TelaVeicUltCarregJPanel":
-                TelaVeicUltCarregJPanel telaVeicUltCarregJPanel = new TelaVeicUltCarregJPanel(this);
+            case Const.TELA_ULT_VEIC_CARREG:
+                TelaUltVeicCarregJPanel telaVeicUltCarregJPanel = new TelaUltVeicCarregJPanel(this);
                 this.getContentPane().add(telaVeicUltCarregJPanel);
-                this.pack();
                 break;
-            case "TelaWhatsappJPanel":
+            case Const.TELA_WHATSAPP:
                 TelaWhatsappJPanel telaWhatsappJPanel = new TelaWhatsappJPanel(this);
                 this.getContentPane().add(telaWhatsappJPanel);
-                this.pack();
                 break;
         }
     }

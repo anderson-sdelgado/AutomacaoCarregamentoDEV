@@ -4,11 +4,19 @@
  */
 package control;
 
+import util.Const;
 import bean.ClienteBean;
 import bean.DadosCarregBean;
-import bean.UltViagemBean;
+import bean.UltCarregBean;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import persistence.ClientePST;
@@ -25,18 +33,61 @@ import util.TP650;
  * @author anderson
  */
 public class AutomacaoCTR {
-    
+
     private String textoCPF;
     private String textoPlaca;
     private String textoCelular;
     private int qtde = 0;
-    private UltViagemBean ultViagemBean;
+    private UltCarregBean ultViagemBean;
     private DadosCarregBean dadosCarregBean;
     
-    public AutomacaoCTR() {
-        dadosCarregBean = new DadosCarregBean();
-        ultViagemBean = new UltViagemBean();
+    private Webcam webcam = null;
+    private WebcamPanel webcamPanel = null;
+    private Executor executor = Executors.newSingleThreadExecutor();
+    private AtomicBoolean initialized = new AtomicBoolean(false);
+    
+    private boolean motoristaExistente;
+    private boolean dadosConfirmado;
+    private boolean confirmarMotorista;
+    private boolean confirmarProduto;
+    private boolean confirmarCliente;
+    private boolean confirmarTransp;
+    private boolean confirmarVeic;
+    
+    private TipoProduto tipoProduto;
+    
+    private String idProduto;
+    private String idCliente;
+    
+    public enum TipoProduto {
+        AÇUCAR, ETANOL;
     }
+
+    public AutomacaoCTR() {
+        ultViagemBean = new UltCarregBean();
+    }
+
+    /////////////////////////////////CAMERA/////////////////////////////////////
+    
+    public void abrirCamera(){
+        webcam = Webcam.getDefault();
+        webcam.setViewSize(WebcamResolution.VGA.getSize());
+        webcamPanel = new WebcamPanel(webcam, false);
+        webcamPanel.setPreferredSize(webcam.getViewSize());
+        webcamPanel.setOpaque(true);
+        webcamPanel.setBackground(Color.BLACK);
+        webcamPanel.setBounds(0, 0, 640, 480);
+        if (initialized.compareAndSet(false, true)) {
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    webcamPanel.start();
+                }
+            });
+        }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
     
     ////////////////////////TelaCPFJPanel///////////////////////////////////////
     
@@ -104,7 +155,7 @@ public class AutomacaoCTR {
         }
         return textoRet;
     }
-    
+
     public String apagarCPF() {
         String textoRet;
         switch (qtde) {
@@ -170,51 +221,24 @@ public class AutomacaoCTR {
         return textoRet;
     }
 
-    public String okCPF(){
+    public String okCPF() {
         if (qtde == 11) {
             String cpfLimpo = textoCPF.replace(".", "").replace("-", "");
-            if (isCPF(textoCPF.toString().trim())) {
-//            if (true) {
+            if (isCPF(textoCPF.trim())) {
                 UltCarregPST carregPST = new UltCarregPST();
                 ultViagemBean = carregPST.retUltViagem(cpfLimpo);
-                dadosCarregBean = new DadosCarregBean();
-                dadosCarregBean.setCpf(cpfLimpo);
-                dadosCarregBean.setNomeMotorista(ultViagemBean.getNomeMotorista());
                 if (ultViagemBean.getMsgErro().equals("0")) {
-                    if (ultViagemBean.getNomeMotorista().equals("0")) {
-                        dadosCarregBean.setConfirmaDados(0);
-                        dadosCarregBean.setRgMotorista(null);
-                        dadosCarregBean.setCnhMotorista(null);
-                        dadosCarregBean.setValCnhMotorista(null);
-                        dadosCarregBean.setIdCliente("0");
-                        return "TelaDadosNEnc";
+                    if (ultViagemBean.getNomeMotorista().equals("-")) {
+                        motoristaExistente = false;
+                        dadosConfirmado = false;
+                        return Const.TELA_MOTO_NAO_ENC;
                     } else {
-                        dadosCarregBean.setConfirmaDados(1);
-                        dadosCarregBean.setCapacidade(ultViagemBean.getCapacidade());
-                        dadosCarregBean.setCnhMotorista(ultViagemBean.getCnhMotorista());
-                        dadosCarregBean.setDescrProdCarreg(ultViagemBean.getDescrProdCarreg());
-                        dadosCarregBean.setIdProdCarreg(ultViagemBean.getIdProdCarreg());
-                        dadosCarregBean.setIdTercTransp(ultViagemBean.getIdTercTransp());
-                        dadosCarregBean.setNomeTransp(ultViagemBean.getNomeTransp());
-                        dadosCarregBean.setPlaca1(ultViagemBean.getPlaca1());
-                        dadosCarregBean.setPlaca2(ultViagemBean.getPlaca2());
-                        dadosCarregBean.setPlaca3(ultViagemBean.getPlaca3());
-                        dadosCarregBean.setRgMotorista(ultViagemBean.getRgMotorista());
-                        dadosCarregBean.setValCnhMotorista(ultViagemBean.getValCnhMotorista());
-                        dadosCarregBean.setIdCliente(ultViagemBean.getIdCliente());
-                        dadosCarregBean.setDescrCliente(ultViagemBean.getDescrCliente());
-                        dadosCarregBean.setRuaCliente(ultViagemBean.getRuaCliente());
-                        dadosCarregBean.setNumCliente(ultViagemBean.getNumCliente());
-                        dadosCarregBean.setBairroCliente(ultViagemBean.getBairroCliente());
-                        dadosCarregBean.setComplCliente(ultViagemBean.getComplCliente());
-                        dadosCarregBean.setCidadeCliente(ultViagemBean.getCidadeCliente());
-                        dadosCarregBean.setEstadoCliente(ultViagemBean.getEstadoCliente());
-                        return "TelaDadosUltCarreg";
+                        motoristaExistente = true;
+                        dadosConfirmado = true;
+                        return Const.TELA_ULT_DADOS_CARREG_MOTO;
                     }
                 } else {
-                    dadosCarregBean.setMsgErro(ultViagemBean.getMsgErro());
-                    dadosCarregBean.setIdPreOrdCarreg(ultViagemBean.getIdPreOrdCarreg());
-                    return "TelaCamCPreOrdem";
+                    return Const.TELA_REIMPRIMIR;
                 }
             } else {
                 return "CPF INVÁLIDO";
@@ -223,19 +247,19 @@ public class AutomacaoCTR {
             return "CPF ABERTO";
         }
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     
     ///////////////////////////////TelaCamCPreOrdem/////////////////////////////
     
     public String reimprimir() {
 
-        if(!dadosCarregBean.getIdPreOrdCarreg().equals("0")){
+        if (!ultViagemBean.getIdPreOrdCarreg().equals("0")) {
 
             ReimpressaoPST reimpressaoPST = new ReimpressaoPST();
-            dadosCarregBean = reimpressaoPST.retReimpressao(dadosCarregBean);
+            DadosCarregBean dadosCarregBean = reimpressaoPST.retReimpressao(ultViagemBean.getIdPreOrdCarreg());
 
-            if(dadosCarregBean.getMsg().equals("")){
+            if (dadosCarregBean.getMsg().equals("")) {
 
                 reimpressaoPST.addReimpressao(dadosCarregBean);
 
@@ -253,10 +277,10 @@ public class AutomacaoCTR {
                     s.write("\n");
                     s.write("\n");
                     s.write(tp.textoNormal("PLACAS: " + dadosCarregBean.getPlaca1()
-                                            + " | " + dadosCarregBean.getPlaca2()
-                                            + " | " + dadosCarregBean.getPlaca3() + ""));
+                            + " | " + dadosCarregBean.getPlaca2()
+                            + " | " + dadosCarregBean.getPlaca3() + ""));
                     s.write("\n");
-                    if(!dadosCarregBean.getNomeMotorista().equals("0")){
+                    if (!dadosCarregBean.getNomeMotorista().equals("0")) {
                         s.write(tp.textoNormal(dadosCarregBean.getNomeMotorista()));
                     }
                     s.write("\n");
@@ -275,55 +299,111 @@ public class AutomacaoCTR {
                     JOptionPane.showConfirmDialog(null, "Error: " + ex);
                 }
                 return "Retorno";
-            }
-            else{
+            } else {
                 return "MSG";
             }
-            
-        }
-        else{
+
+        } else {
             return "NãoContemPreOrdem";
         }
-        
+
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    
-    //////////////////////////////////TelaCamera////////////////////////////////
 
-    public void atualizarDadosRetorno() throws Exception{
+    //////////////////////////////////TelaCamera////////////////////////////////
+    
+    public void salvarDadosCarreg() {
+        DadosCarregBean dadosCarregBean = new DadosCarregBean();
+        if(motoristaExistente){
+            dadosCarregBean = dadosUltCarreg();
+            if(!confirmarMotorista){
+                dadosCarregBean.setCpf(textoCPF);
+                dadosCarregBean.setConfirmaDados(0);
+            }
+            if(!confirmarProduto){
+                dadosCarregBean.setIdProdCarreg(idProduto);
+                dadosCarregBean.setConfirmaDados(0);
+            }
+            if(!confirmarCliente){
+                dadosCarregBean.setIdCliente(idCliente);
+            }
+            if(!confirmarTransp){
+                dadosCarregBean.setConfirmaDados(0);
+            }
+            if(!confirmarVeic){
+                dadosCarregBean.setPlaca1(textoPlaca);
+                dadosCarregBean.setConfirmaDados(0);
+            }
+        } else {
+            dadosCarregBean.setIdProdCarreg(idProduto);
+            dadosCarregBean.setCpf(textoCPF);
+            dadosCarregBean.setIdCliente(idCliente);
+            dadosCarregBean.setCelular(textoCelular);
+            dadosCarregBean.setPlaca1(textoPlaca);
+            dadosCarregBean.setConfirmaDados(0);
+        }
         DadosRetornoPST senhaRetornoPST = new DadosRetornoPST();
         if (!dadosCarregBean.getIdProdCarreg().equals("5")) {
-            dadosCarregBean.setIdCliente("0");
+            dadosCarregBean.setIdCliente(null);
         }
-        dadosCarregBean = senhaRetornoPST.retDadosCarreg(dadosCarregBean);
+        this.dadosCarregBean = senhaRetornoPST.retDadosCarreg(dadosCarregBean);
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
-        
+    
     ///////////////////////////TelaClassifProdCarreg////////////////////////////
     
-    public void classif1(){
-        if (dadosCarregBean.getIdProdCarreg().equals("acucar")) {
-            dadosCarregBean.setIdProdCarreg("2");
+    public void setProduto1() {
+        if (tipoProduto == TipoProduto.AÇUCAR) {
+            idProduto = "2";
         } else {
-            dadosCarregBean.setIdProdCarreg("3");
+            idProduto = "3";
         }
     }
-    
-    public void classif2(){
-        if (dadosCarregBean.getIdProdCarreg().equals("acucar")) {
-            dadosCarregBean.setIdProdCarreg("1");
+
+    public void setProduto2() {
+        if (tipoProduto == TipoProduto.AÇUCAR) {
+            idProduto = "1";
         } else {
-            dadosCarregBean.setIdProdCarreg("4");
+            idProduto = "4";
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////TelaDadosUltCarreg////////////////////////////////
+    
+    public DadosCarregBean dadosUltCarreg() {
+        DadosCarregBean dadosCarregBean = new DadosCarregBean();
+        dadosCarregBean.setConfirmaDados(1);
+        dadosCarregBean.setCapacidade(ultViagemBean.getCapacidade());
+        dadosCarregBean.setCnhMotorista(ultViagemBean.getCnhMotorista());
+        dadosCarregBean.setDescrProdCarreg(ultViagemBean.getDescrProdCarreg());
+        dadosCarregBean.setIdProdCarreg(ultViagemBean.getIdProdCarreg());
+        dadosCarregBean.setIdTercTransp(ultViagemBean.getIdTercTransp());
+        dadosCarregBean.setNomeTransp(ultViagemBean.getNomeTransp());
+        dadosCarregBean.setPlaca1(ultViagemBean.getPlaca1());
+        dadosCarregBean.setPlaca2(ultViagemBean.getPlaca2());
+        dadosCarregBean.setPlaca3(ultViagemBean.getPlaca3());
+        dadosCarregBean.setRgMotorista(ultViagemBean.getRgMotorista());
+        dadosCarregBean.setValCnhMotorista(ultViagemBean.getValCnhMotorista());
+        dadosCarregBean.setIdCliente(ultViagemBean.getIdCliente());
+        dadosCarregBean.setDescrCliente(ultViagemBean.getDescrCliente());
+        dadosCarregBean.setRuaCliente(ultViagemBean.getRuaCliente());
+        dadosCarregBean.setNumCliente(ultViagemBean.getNumCliente());
+        dadosCarregBean.setBairroCliente(ultViagemBean.getBairroCliente());
+        dadosCarregBean.setComplCliente(ultViagemBean.getComplCliente());
+        dadosCarregBean.setCidadeCliente(ultViagemBean.getCidadeCliente());
+        dadosCarregBean.setEstadoCliente(ultViagemBean.getEstadoCliente());
+        return dadosCarregBean;
     }
     
     ////////////////////////////////////////////////////////////////////////////
-        
+      
     ///////////////////////////TelaImprimirSenha////////////////////////////////
     
-    public String msgImprimir(){
+    public String msgImprimir() {
         MsgPST msgPST = new MsgPST();
         String tipo;
         if (dadosCarregBean.getIdProdCarreg().equals("1")
@@ -332,15 +412,13 @@ public class AutomacaoCTR {
         } else {
             tipo = "2";
         }
-        if(dadosCarregBean.getIdEtapa() != null){
-            if (dadosCarregBean.getIdEtapa().trim().equals("2")) {
-                dadosCarregBean.setConfirmaDados(0);
-            }
+        if ((dadosCarregBean.getIdEtapa() != null) && (dadosCarregBean.getIdEtapa().trim().equals("2"))) {
+            dadosCarregBean.setConfirmaDados(0);
         }
         return msgPST.retornaMsg(tipo, dadosCarregBean.getConfirmaDados());
     }
-    
-    public void imprimir(){
+
+    public void imprimir() {
         try {
             TCPIP s = new TCPIP();
             TP650 tp = new TP650();
@@ -355,10 +433,10 @@ public class AutomacaoCTR {
             s.write("\n");
             s.write("\n");
             s.write(tp.textoNormal("PLACAS: " + dadosCarregBean.getPlaca1()
-                                    + " | " + dadosCarregBean.getPlaca2()
-                                    + " | " + dadosCarregBean.getPlaca3() + ""));
+                    + " | " + dadosCarregBean.getPlaca2()
+                    + " | " + dadosCarregBean.getPlaca3() + ""));
             s.write("\n");
-            if(!dadosCarregBean.getNomeMotorista().equals("0")){
+            if (!dadosCarregBean.getNomeMotorista().equals("0")) {
                 s.write(tp.textoNormal(dadosCarregBean.getNomeMotorista()));
             }
             s.write("\n");
@@ -377,11 +455,48 @@ public class AutomacaoCTR {
         }
     }
     
+    public void imprimirTeste() {
+        try {
+            TCPIP s = new TCPIP();
+            TP650 tp = new TP650();
+            s.connect();
+            s.write(tp.textoNormal(""));
+            s.write(tp.textoNormal("USINA SANTA FE S.A."));
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.textoNormal("TICKET DE CARREGAMENTO"));
+            s.write("\n");
+            s.write(tp.textoNegrito("TES0001"));
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.textoNormal("PLACAS: AAA1111 " 
+                    + " | BBB2222"
+                    + " | CCC3333"));
+            s.write("\n");
+//            if (!dadosCarregBean.getNomeMotorista().equals("0")) {
+                s.write(tp.textoNormal("ANDERSON DA SILVA DELGADO"));
+//            }
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.qrcode(8, "TES0001"));
+            s.write("\n");
+            s.write("\n");
+            s.write("\n");
+            s.write("\n");
+            s.write(tp.abreGaveta(0, 4));
+            s.write("\n\n\n\n");
+            s.write(tp.cortePapel());
+            s.close();
+        } catch (IOException ex) {
+            JOptionPane.showConfirmDialog(null, "Error: " + ex);
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////
-        
+    
     ///////////////////////////TelaListaCliente/////////////////////////////////
-        
-    public DefaultListModel preencherListaCliente(){
+    
+    public DefaultListModel preencherListaCliente() {
         ClientePST clientePST = new ClientePST();
         ArrayList clienteList = clientePST.retornaListCliente();
         DefaultListModel modelo = new DefaultListModel();
@@ -392,18 +507,23 @@ public class AutomacaoCTR {
         clienteList.clear();
         return modelo;
     }
-    
-    public void ajusterCliente(int posLista){
+
+    public void ajusterCliente(int posLista) {
         ClientePST clientePST = new ClientePST();
         ArrayList clienteList = clientePST.retornaListCliente();
         ClienteBean clienteTO = (ClienteBean) clienteList.get(posLista);
         clienteList.clear();
-        dadosCarregBean.setIdCliente(clienteTO.getIdCliente());
+        idCliente = clienteTO.getIdCliente();
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
-        
+    
     /////////////////////////////TelaPlaca//////////////////////////////////////
+    
+    public void iniciarDadosTelaPlaca(){
+        qtde = 0;
+        textoPlaca = "";
+    }
     
     public String preencherPlaca(String texto) {
         String textoRet;
@@ -494,9 +614,9 @@ public class AutomacaoCTR {
         }
         return textoRet;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
-        
+    
     /////////////////////////////TelaWhatsapp///////////////////////////////////
     
     public String preencherCelular(String texto) {
@@ -628,9 +748,85 @@ public class AutomacaoCTR {
         }
         return textoRet;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
+
+    public Webcam getWebcam() {
+        return webcam;
+    }
     
+    public WebcamPanel getWebcamPanel() {
+        return webcamPanel;
+    }
+
+    public String getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(String idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public boolean isMotoristaExistente() {
+        return motoristaExistente;
+    }
+
+    public boolean isConfirmarMotorista() {
+        return confirmarMotorista;
+    }
+
+    public void setConfirmarMotorista(boolean confirmarMotorista) {
+        this.confirmarMotorista = confirmarMotorista;
+    }
+
+    public boolean isConfirmarProduto() {
+        return confirmarProduto;
+    }
+
+    public void setConfirmarProduto(boolean confirmarProduto) {
+        this.confirmarProduto = confirmarProduto;
+    }
+
+    public boolean isConfirmarCliente() {
+        return confirmarCliente;
+    }
+
+    public void setConfirmarCliente(boolean confirmarCliente) {
+        this.confirmarCliente = confirmarCliente;
+    }
+
+    public boolean isConfirmarTransp() {
+        return confirmarTransp;
+    }
+
+    public void setConfirmarTransp(boolean confirmarTransp) {
+        this.confirmarTransp = confirmarTransp;
+    }
+
+    public boolean isConfirmarVeic() {
+        return confirmarVeic;
+    }
+
+    public void setConfirmarVeic(boolean confirmarVeic) {
+        this.confirmarVeic = confirmarVeic;
+    }
+
+    public TipoProduto getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public void setTipoProduto(TipoProduto tipoProduto) {
+        this.tipoProduto = tipoProduto;
+    }
+    
+    public boolean isDadosConfirmado() {
+        return dadosConfirmado;
+    }
+
+    public void setDadosConfirmado(boolean dadosConfirmado) {
+        this.dadosConfirmado = dadosConfirmado;
+    }
+
     public boolean isCPF(String cpf) {
         CNP cnp = new CNP();
         return cnp.isValidCPF(cpf);
@@ -659,7 +855,7 @@ public class AutomacaoCTR {
     public void setTextoCelular(String textoCelular) {
         this.textoCelular = textoCelular;
     }
-    
+
     public int getQtde() {
         return qtde;
     }
@@ -668,11 +864,11 @@ public class AutomacaoCTR {
         this.qtde = qtde;
     }
 
-    public UltViagemBean getUltViagemBean() {
+    public UltCarregBean getUltViagemBean() {
         return ultViagemBean;
     }
 
-    public void setUltViagemBean(UltViagemBean ultViagemBean) {
+    public void setUltViagemBean(UltCarregBean ultViagemBean) {
         this.ultViagemBean = ultViagemBean;
     }
 
@@ -683,5 +879,7 @@ public class AutomacaoCTR {
     public void setDadosCarregBean(DadosCarregBean dadosCarregBean) {
         this.dadosCarregBean = dadosCarregBean;
     }
+    
+    
 
 }

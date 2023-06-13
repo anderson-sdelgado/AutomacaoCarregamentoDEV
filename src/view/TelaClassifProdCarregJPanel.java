@@ -4,10 +4,12 @@
  */
 package view;
 
+import control.AutomacaoCTR;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import util.Const;
 
 /**
  *
@@ -62,7 +64,7 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonCancelar, gridBagConstraints);
 
         jButtonRetornar.setBackground(new java.awt.Color(255, 255, 255));
@@ -78,7 +80,7 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonRetornar, gridBagConstraints);
 
         jLabelClassifProd.setBackground(new java.awt.Color(255, 255, 255));
@@ -89,7 +91,7 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(120, 0, 120, 0);
+        gridBagConstraints.insets = new java.awt.Insets(100, 0, 100, 0);
         add(jLabelClassifProd, gridBagConstraints);
 
         jButtonClassif1.setBackground(new java.awt.Color(255, 255, 255));
@@ -104,8 +106,8 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(0, 30, 10, 10);
         add(jButtonClassif1, gridBagConstraints);
 
@@ -121,8 +123,8 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 30);
         add(jButtonClassif2, gridBagConstraints);
 
@@ -138,8 +140,8 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(10, 30, 0, 10);
         add(jButtonClassif3, gridBagConstraints);
 
@@ -155,42 +157,42 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 30);
         add(jButtonClassif4, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
 
-        this.baseJFrame.mudarTela("TelaCPFJPanel");
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonClassif1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClassif1ActionPerformed
 
-        this.baseJFrame.getAutomacaoCTR().classif1();
+        this.baseJFrame.getAutomacaoCTR().setProduto1();
         mudarTela();
 
     }//GEN-LAST:event_jButtonClassif1ActionPerformed
 
     private void jButtonClassif2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClassif2ActionPerformed
 
-        this.baseJFrame.getAutomacaoCTR().classif2();
+        this.baseJFrame.getAutomacaoCTR().setProduto2();
         mudarTela();
 
     }//GEN-LAST:event_jButtonClassif2ActionPerformed
 
     private void jButtonClassif3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClassif3ActionPerformed
 
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setIdProdCarreg("7");
+        this.baseJFrame.getAutomacaoCTR().setIdProduto("7");
         mudarTela();
 
     }//GEN-LAST:event_jButtonClassif3ActionPerformed
 
     private void jButtonClassif4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClassif4ActionPerformed
 
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setIdProdCarreg("8");
+        this.baseJFrame.getAutomacaoCTR().setIdProduto("8");
         mudarTela();
 
     }//GEN-LAST:event_jButtonClassif4ActionPerformed
@@ -213,26 +215,26 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void exibir() {
-        if (this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getIdProdCarreg().equals("acucar")) {
+        if (this.baseJFrame.getAutomacaoCTR().getTipoProduto() == AutomacaoCTR.TipoProduto.AÇUCAR) {
             jButtonClassif1.setText("AÇÚCAR ENSACADO");
             jButtonClassif2.setText("AÇÚCAR BIG BAG");
-            jButtonClassif3.enable(true);
+            jButtonClassif3.setVisible(true);
             jButtonClassif3.setText("AÇÚCAR GRANEL");
-            jButtonClassif4.enable(true);
+            jButtonClassif4.setVisible(true);
             jButtonClassif4.setText("AÇUCAR CONTAINER");
         } else {
             jButtonClassif1.setText("ETANOL HIDRATADO");
             jButtonClassif2.setText("ETANOL ANIDRO");
-            jButtonClassif3.enable(false);
-            jButtonClassif4.enable(false);
+            jButtonClassif3.setVisible(false);
+            jButtonClassif4.setVisible(false);
         }
     }
 
     private void mudarTela() {
-        if (this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getNomeMotorista().equals("0")) {
-            this.baseJFrame.mudarTela("TelaPlacaJPanel");
+        if (this.baseJFrame.getAutomacaoCTR().isMotoristaExistente()) {
+            this.baseJFrame.mudarTela(Const.TELA_ULT_TRANSP_CARREG);
         } else {
-            this.baseJFrame.mudarTela("TelaTranspUltCarregJPanel");
+            this.baseJFrame.mudarTela(Const.TELA_PLACA);
         }
     }
 

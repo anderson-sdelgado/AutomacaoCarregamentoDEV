@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+import util.Const;
 
 /**
  *
@@ -32,11 +33,7 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
         this.image = imageIcon.getImage();
         defaultJDialog = new DefaultJDialog(new javax.swing.JFrame(), true);
         jLabelPlaca.setText("___-____");
-        this.baseJFrame.getAutomacaoCTR().setQtde(0);
-        this.baseJFrame.getAutomacaoCTR().setTextoPlaca("");
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setPlaca1("");
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setPlaca2(null);
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setPlaca3(null);
+        iniciandoTela();
         chamaTecladoLetra();
     }
 
@@ -72,7 +69,7 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonCancelar, gridBagConstraints);
 
         jButtonRetornar.setBackground(new java.awt.Color(255, 255, 255));
@@ -88,7 +85,7 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonRetornar, gridBagConstraints);
 
         jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -97,7 +94,7 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(jLabelMsg, gridBagConstraints);
 
         jLabelPlaca.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -106,7 +103,7 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         add(jLabelPlaca, gridBagConstraints);
 
         jPanelPrincPlaca.setOpaque(false);
@@ -132,7 +129,7 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
 
-        this.baseJFrame.mudarTela("TelaCPFJPanel");
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -151,6 +148,10 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelPrincPlaca;
     // End of variables declaration//GEN-END:variables
 
+    private void iniciandoTela(){
+        this.baseJFrame.getAutomacaoCTR().iniciarDadosTelaPlaca();
+    }
+    
     public void preencherPlaca(String letraNumPlaca) {
         switch (this.baseJFrame.getAutomacaoCTR().getQtde()) {
             case 2:
@@ -189,18 +190,10 @@ public class TelaPlacaJPanel extends javax.swing.JPanel {
     }
 
     public void ok() {
-
         if (this.baseJFrame.getAutomacaoCTR().getQtde() == 7) {
-
-            this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setPlaca1(this.baseJFrame.getAutomacaoCTR().getTextoPlaca());
-            this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setPlaca2("");
-            this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setPlaca3("");
-            this.baseJFrame.mudarTela("TelaCameraJPanel");
-
+            this.baseJFrame.mudarTela(Const.TELA_CAMERA);
         } else {
-
             terminarPlaca();
-
         }
     }
 

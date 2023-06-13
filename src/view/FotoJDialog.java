@@ -92,7 +92,7 @@ public class FotoJDialog extends javax.swing.JDialog {
                 .addGap(29, 29, 29))
         );
 
-        setBounds(1150, 330, 333, 303);
+        setBounds(1000, 230, 333, 303);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSimActionPerformed

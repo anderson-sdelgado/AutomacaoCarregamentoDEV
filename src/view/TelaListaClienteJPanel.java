@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import util.Const;
 
 /**
  *
@@ -58,7 +59,7 @@ public class TelaListaClienteJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonCancelar, gridBagConstraints);
 
         jButtonRetornar.setBackground(new java.awt.Color(255, 255, 255));
@@ -74,9 +75,10 @@ public class TelaListaClienteJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonRetornar, gridBagConstraints);
 
+        jListCliente.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jListCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListClienteMouseClicked(evt);
@@ -89,7 +91,7 @@ public class TelaListaClienteJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 400;
         gridBagConstraints.ipady = 200;
-        gridBagConstraints.insets = new java.awt.Insets(150, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(40, 0, 0, 0);
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,13 +120,10 @@ public class TelaListaClienteJPanel extends javax.swing.JPanel {
 
     public void salvarCliente() {
         this.baseJFrame.getAutomacaoCTR().ajusterCliente(posLista);
-        if (this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getNomeMotorista().equals("0")) {
-            this.baseJFrame.mudarTela("TelaPlacaJPanel");
+        if (this.baseJFrame.getAutomacaoCTR().isMotoristaExistente()) {
+            this.baseJFrame.mudarTela(Const.TELA_ULT_TRANSP_CARREG);
         } else {
-            if (this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getIdCliente().equals("0")) {
-                this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setConfirmaDados(0);
-            }
-            this.baseJFrame.mudarTela("TelaTranspUltCarregJPanel");
+            this.baseJFrame.mudarTela(Const.TELA_PLACA);
         }
     }
 

@@ -9,7 +9,7 @@ package bean;
  *
  * @author anderson
  */
-public class DadosCarregBean extends UltViagemBean {
+public class DadosCarregBean extends UltCarregBean {
 
     private String cpf;
     private String celular;

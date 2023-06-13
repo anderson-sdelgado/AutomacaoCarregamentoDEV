@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+import util.Const;
 
 /**
  *
@@ -33,7 +34,6 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         jLabelCelular.setText("(__) _____-____");
         this.baseJFrame.getAutomacaoCTR().setQtde(0);
         this.baseJFrame.getAutomacaoCTR().setTextoCelular("");
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setCelular("");
     }
 
     /**
@@ -79,7 +79,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonCancelar, gridBagConstraints);
 
         jButtonRetornar.setBackground(new java.awt.Color(255, 255, 255));
@@ -95,7 +95,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonRetornar, gridBagConstraints);
 
         jLabelMsg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -108,7 +108,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         add(jLabelMsg, gridBagConstraints);
 
-        jLabelCelular.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabelCelular.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         jLabelCelular.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCelular.setText("(__) _____-____");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -131,7 +131,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(10, 80, 5, 0);
         add(jButtonNum1, gridBagConstraints);
 
@@ -148,8 +148,8 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(10, 40, 5, 40);
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 5, 20);
         add(jButtonNum2, gridBagConstraints);
 
         jButtonNum3.setBackground(new java.awt.Color(255, 255, 255));
@@ -165,7 +165,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 5, 80);
         add(jButtonNum3, gridBagConstraints);
 
@@ -182,7 +182,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 80, 5, 0);
         add(jButtonNum4, gridBagConstraints);
 
@@ -199,8 +199,8 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(5, 40, 5, 40);
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 20);
         add(jButtonNum5, gridBagConstraints);
 
         jButtonNum6.setBackground(new java.awt.Color(255, 255, 255));
@@ -216,7 +216,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 80);
         add(jButtonNum6, gridBagConstraints);
 
@@ -233,7 +233,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 80, 5, 0);
         add(jButtonNum7, gridBagConstraints);
 
@@ -250,8 +250,8 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(5, 40, 5, 40);
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 5, 20);
         add(jButtonNum8, gridBagConstraints);
 
         jButtonNum9.setBackground(new java.awt.Color(255, 255, 255));
@@ -267,7 +267,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 80);
         add(jButtonNum9, gridBagConstraints);
 
@@ -284,7 +284,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 15;
-        gridBagConstraints.ipady = 90;
+        gridBagConstraints.ipady = 70;
         gridBagConstraints.insets = new java.awt.Insets(5, 80, 10, 0);
         add(jButtonCorrige, gridBagConstraints);
 
@@ -301,8 +301,8 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(5, 40, 10, 40);
+        gridBagConstraints.ipady = 30;
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 10, 20);
         add(jButtonNum0, gridBagConstraints);
 
         jButtonOK.setBackground(new java.awt.Color(255, 255, 255));
@@ -318,7 +318,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 60;
+        gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 10, 80);
         add(jButtonOK, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
@@ -397,7 +397,7 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         
-        this.baseJFrame.mudarTela("TelaCPFJPanel");
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
         
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -429,11 +429,10 @@ public class TelaWhatsappJPanel extends javax.swing.JPanel {
     
     public void ok() {
         if (this.baseJFrame.getAutomacaoCTR().getQtde() == 11) {
-            this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setCelular(this.baseJFrame.getAutomacaoCTR().getTextoCelular());
-            if (this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getNomeMotorista().equals("0")) {
-                this.baseJFrame.mudarTela("TelaProdutoCarregJPanel");
+            if (this.baseJFrame.getAutomacaoCTR().isMotoristaExistente()) {
+                this.baseJFrame.mudarTela(Const.TELA_ULT_PRODUTO_CARREG);
             } else {
-                this.baseJFrame.mudarTela("TelaProdutoUltCarregJPanel");
+                this.baseJFrame.mudarTela(Const.TELA_PRODUTO_CARREG);
             }
             this.setVisible(false);
         } else {

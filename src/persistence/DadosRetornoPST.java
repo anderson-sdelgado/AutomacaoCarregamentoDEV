@@ -32,12 +32,8 @@ public class DadosRetornoPST {
             conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
 
-            if(dadosCarregTO.getIdCliente().trim().equals("0")){
-                dadosCarregTO.setIdCliente(null);
-            }
-            
             System.out.println("dadosCarregTO.getIdProdCarreg() = " + dadosCarregTO.getIdProdCarreg());
-            System.out.println("dadosCarregTO.getCpf() = " + dadosCarregTO.getCpf());
+            System.out.println("dadosCarregTO.getCpf() = " + dadosCarregTO.getCpf().replace(".", "").replace("-", ""));
             System.out.println("dadosCarregTO.getIdCliente() = " + dadosCarregTO.getIdCliente());
             System.out.println("dadosCarregTO.getCelular() = " + dadosCarregTO.getCelular().replace("-", "").replace("(", "").replace(")", "").replace(" ", ""));
             System.out.println("dadosCarregTO.getIdTercTransp() = " + dadosCarregTO.getIdTercTransp());
@@ -46,10 +42,10 @@ public class DadosRetornoPST {
             System.out.println("dadosCarregTO.getPlaca3() = " + dadosCarregTO.getPlaca3());
             System.out.println("dadosCarregTO.getConfirmaDados() = " + dadosCarregTO.getConfirmaDados());
             
-            callableStatement.setString(1, dadosCarregTO.getIdProdCarreg());
-            callableStatement.setString(2, dadosCarregTO.getCpf());
-            callableStatement.setString(4, dadosCarregTO.getIdCliente());
-            callableStatement.setString(3, dadosCarregTO.getCelular().replace("-", "").replace("(", "").replace(")", "").replace(" ", ""));
+            callableStatement.setString(1, dadosCarregTO.getIdProdCarreg()); //
+            callableStatement.setString(2, dadosCarregTO.getCpf().replace(".", "").replace("-", "")); //
+            callableStatement.setString(4, dadosCarregTO.getIdCliente()); //
+            callableStatement.setString(3, dadosCarregTO.getCelular().replace("-", "").replace("(", "").replace(")", "").replace(" ", "")); //
             callableStatement.setString(5, dadosCarregTO.getIdTercTransp());
             callableStatement.setString(6, dadosCarregTO.getPlaca1().replace("-", ""));
             callableStatement.setString(7, dadosCarregTO.getPlaca2());

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+import util.Const;
 
 /**
  *
@@ -69,7 +70,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonCancelar, gridBagConstraints);
 
         jButtonRetornar.setBackground(new java.awt.Color(255, 255, 255));
@@ -85,7 +86,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 70;
+        gridBagConstraints.ipady = 50;
         add(jButtonRetornar, gridBagConstraints);
 
         jLabelMsgInicial.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -94,7 +95,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(50, 0, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         add(jLabelMsgInicial, gridBagConstraints);
 
         jLabelSenha.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -103,7 +104,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
         add(jLabelSenha, gridBagConstraints);
 
         jLabelStatus.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -112,7 +113,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 0);
         add(jLabelStatus, gridBagConstraints);
 
         jLabelMsg.setColumns(20);
@@ -138,27 +139,27 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.ipadx = 50;
-        gridBagConstraints.ipady = 50;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        gridBagConstraints.ipady = 40;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(jButtonOK, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
 
-        this.baseJFrame.mudarTela("TelaCPFJPanel");
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
 
         fechaTela = true;
-        this.baseJFrame.mudarTela("TelaCPFJPanel");
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
 
     }//GEN-LAST:event_jButtonOKActionPerformed
 
     private void jButtonRetornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetornarActionPerformed
 
-        this.baseJFrame.retornarTela();
+        this.baseJFrame.mudarTela(Const.TELA_CPF);
 
     }//GEN-LAST:event_jButtonRetornarActionPerformed
 
@@ -175,7 +176,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void exibir() {
-
+        
         jLabelSenha.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getSenha());
         jLabelStatus.setText("STATUS: " + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getDescrEtapa());
         jLabelMsg.setText(this.baseJFrame.getAutomacaoCTR().msgImprimir().replace(".", ".\n").toUpperCase());
@@ -195,7 +196,7 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
     private void fecharTela() {
         if (!fechaTela) {
             fechaTela = true;
-            this.baseJFrame.mudarTela("TelaCPFJPanel");
+            this.baseJFrame.mudarTela(Const.TELA_CPF);
         }
     }
 
