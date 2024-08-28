@@ -41,7 +41,7 @@ public class Conn {
                             "      (SERVER = DEDICATED) " +
                             "      (SERVICE_NAME = STAFEDEV) " +
                             "    ) " +
-                            "  )";
+                                            "  )";
 
             connection = DriverManager.getConnection(url, usuario, senha);
             
