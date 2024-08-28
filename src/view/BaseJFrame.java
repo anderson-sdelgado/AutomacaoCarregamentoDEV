@@ -28,10 +28,8 @@ public final class BaseJFrame extends javax.swing.JFrame {
     private ArrayList<String> telas;
 
     public BaseJFrame() {
-
         automacaoCTR = new AutomacaoCTR();
-        automacaoCTR.imprimirTeste();
-//        telaInicial();
+        telaInicial();
     }
 
     private void telaInicial() {
@@ -69,7 +67,6 @@ public final class BaseJFrame extends javax.swing.JFrame {
     }
 
     private void tela(String telaProxima) {
-        this.pack();
         switch (telaProxima) {
             case Const.TELA_CPF:
                 TelaCPFJPanel telaCPFJPanel = new TelaCPFJPanel(this);

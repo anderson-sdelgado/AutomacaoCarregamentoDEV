@@ -115,7 +115,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         jLabelMsg.setText("Posicione-se corretamente para a autenticação.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
         add(jLabelMsg, gridBagConstraints);
 
@@ -132,7 +132,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipadx = 640;
         gridBagConstraints.ipady = 480;
         add(jPanelCamera, gridBagConstraints);
@@ -148,7 +148,7 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.ipady = 40;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
@@ -205,22 +205,21 @@ public class TelaCameraJPanel extends javax.swing.JPanel {
                 
                 this.baseJFrame.getAutomacaoCTR().salvarDadosCarreg();
                 
-                ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getIdCarreg() + ".gif"));
-//                ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + ".gif"));
+//                ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.baseJFrame.getAutomacaoCTR().getIdCarreg() + ".gif"));
+                ImageIO.write(princImage, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.baseJFrame.getAutomacaoCTR().getIdCarreg() + ".gif"));
 
                 BufferedImage image = this.baseJFrame.getAutomacaoCTR().getWebcam().getImage();
-                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getIdCarreg() + "_01.gif"));
-//                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.telaInicialCPFGUI.getDadosCarregTO().getIdCarreg() + "_01.gif"));
+//                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\" + this.baseJFrame.getAutomacaoCTR().getIdCarreg() + "_01.gif"));
+                ImageIO.write(image, "GIF", new File("K:\\Foto_pre_ordcarreg\\PRD\\" + this.baseJFrame.getAutomacaoCTR().getIdCarreg() + "_01.gif"));
                 this.baseJFrame.getAutomacaoCTR().getWebcamPanel().resume();
 
                 jPanelCamera.removeAll();
                 jPanelCamera.add(this.baseJFrame.getAutomacaoCTR().getWebcamPanel());
-                
-                this.baseJFrame.getAutomacaoCTR().getWebcamPanel().resume();
+
                 this.baseJFrame.mudarTela(Const.TELA_IMPRIMIR_SENHA);
 
             } catch (Exception ex) {
-                Logger.getLogger(getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Erro: " + ex);
             }
 
         } else {

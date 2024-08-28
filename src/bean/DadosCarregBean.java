@@ -9,7 +9,7 @@ package bean;
  *
  * @author anderson
  */
-public class DadosCarregBean extends UltCarregBean {
+public class DadosCarregBean {
 
     private String cpf;
     private String celular;
@@ -19,6 +19,7 @@ public class DadosCarregBean extends UltCarregBean {
     private String descrEtapa;
     private String msg;
     private String idCarreg;
+    private UltCarregBean ultCarregBean;
     
     public DadosCarregBean() {
     }
@@ -87,5 +88,12 @@ public class DadosCarregBean extends UltCarregBean {
         this.descrEtapa = descrEtapa;
     }
 
-    
+    public UltCarregBean getUltCarregBean() {
+        return ultCarregBean;
+    }
+
+    public void setUltCarregBean(UltCarregBean ultCarregBean) {
+        this.ultCarregBean = ultCarregBean;
+    }
+
 }

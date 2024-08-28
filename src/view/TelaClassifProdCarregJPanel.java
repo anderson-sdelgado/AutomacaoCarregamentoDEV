@@ -224,7 +224,7 @@ public class TelaClassifProdCarregJPanel extends javax.swing.JPanel {
             jButtonClassif4.setText("AÇUCAR CONTAINER");
         } else {
             jButtonClassif1.setText("ETANOL HIDRATADO");
-            jButtonClassif2.setText("ETANOL ANIDRO");
+            jButtonClassif2.setText("ETANOL GRADE B");
             jButtonClassif3.setVisible(false);
             jButtonClassif4.setVisible(false);
         }

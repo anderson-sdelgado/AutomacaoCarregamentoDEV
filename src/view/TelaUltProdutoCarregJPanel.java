@@ -178,7 +178,7 @@ public class TelaUltProdutoCarregJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     
     private void carreg() {
-        jLabelProd.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getDescrProdCarreg());
+        jLabelProd.setText(this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getDescrProdCarreg());
     }
 
     @Override

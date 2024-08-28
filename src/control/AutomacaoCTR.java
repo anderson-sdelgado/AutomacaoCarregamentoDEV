@@ -227,6 +227,13 @@ public class AutomacaoCTR {
             if (isCPF(textoCPF.trim())) {
                 UltCarregPST carregPST = new UltCarregPST();
                 ultViagemBean = carregPST.retUltViagem(cpfLimpo);
+                motoristaExistente = true;
+                dadosConfirmado = true;
+                confirmarMotorista = true;
+                confirmarProduto = true;
+                confirmarCliente = true;
+                confirmarTransp = true;
+                confirmarVeic = true;
                 if (ultViagemBean.getMsgErro().equals("0")) {
                     if (ultViagemBean.getNomeMotorista().equals("-")) {
                         motoristaExistente = false;
@@ -257,47 +264,13 @@ public class AutomacaoCTR {
         if (!ultViagemBean.getIdPreOrdCarreg().equals("0")) {
 
             ReimpressaoPST reimpressaoPST = new ReimpressaoPST();
-            DadosCarregBean dadosCarregBean = reimpressaoPST.retReimpressao(ultViagemBean.getIdPreOrdCarreg());
+            dadosCarregBean = reimpressaoPST.retReimpressao(ultViagemBean.getIdPreOrdCarreg());
 
             if (dadosCarregBean.getMsg().equals("")) {
 
-                reimpressaoPST.addReimpressao(dadosCarregBean);
-
-                try {
-                    TCPIP s = new TCPIP();
-                    TP650 tp = new TP650();
-                    s.connect();
-                    s.write(tp.textoNormal(""));
-                    s.write(tp.textoNormal("USINA SANTA FE S.A."));
-                    s.write("\n");
-                    s.write("\n");
-                    s.write(tp.textoNormal("TICKET DE CARREGAMENTO"));
-                    s.write("\n");
-                    s.write(tp.textoNegrito(dadosCarregBean.getSenha()));
-                    s.write("\n");
-                    s.write("\n");
-                    s.write(tp.textoNormal("PLACAS: " + dadosCarregBean.getPlaca1()
-                            + " | " + dadosCarregBean.getPlaca2()
-                            + " | " + dadosCarregBean.getPlaca3() + ""));
-                    s.write("\n");
-                    if (!dadosCarregBean.getNomeMotorista().equals("0")) {
-                        s.write(tp.textoNormal(dadosCarregBean.getNomeMotorista()));
-                    }
-                    s.write("\n");
-                    s.write("\n");
-                    s.write(tp.qrcode(8, dadosCarregBean.getSenha()));
-                    s.write("\n");
-                    s.write("\n");
-                    s.write("\n");
-                    s.write("\n");
-                    s.write(tp.abreGaveta(0, 4));
-                    s.write("\n\n\n\n");
-                    s.write(tp.cortePapel());
-                    s.close();
-
-                } catch (IOException ex) {
-                    JOptionPane.showConfirmDialog(null, "Error: " + ex);
-                }
+                reimpressaoPST.addReimpressao(ultViagemBean.getIdPreOrdCarreg());
+                imprimir();
+                
                 return "Retorno";
             } else {
                 return "MSG";
@@ -315,38 +288,43 @@ public class AutomacaoCTR {
     
     public void salvarDadosCarreg() {
         DadosCarregBean dadosCarregBean = new DadosCarregBean();
+        dadosCarregBean.setCpf(textoCPF);            
+        dadosCarregBean.setCelular(textoCelular);
+        dadosCarregBean.setUltCarregBean(ultViagemBean);
         if(motoristaExistente){
-            dadosCarregBean = dadosUltCarreg();
+            dadosCarregBean.setConfirmaDados(1);
             if(!confirmarMotorista){
-                dadosCarregBean.setCpf(textoCPF);
                 dadosCarregBean.setConfirmaDados(0);
             }
             if(!confirmarProduto){
-                dadosCarregBean.setIdProdCarreg(idProduto);
+                dadosCarregBean.getUltCarregBean().setIdProdCarreg(idProduto);
                 dadosCarregBean.setConfirmaDados(0);
             }
             if(!confirmarCliente){
-                dadosCarregBean.setIdCliente(idCliente);
+                dadosCarregBean.getUltCarregBean().setIdCliente(idCliente);
             }
             if(!confirmarTransp){
                 dadosCarregBean.setConfirmaDados(0);
             }
             if(!confirmarVeic){
-                dadosCarregBean.setPlaca1(textoPlaca);
+                dadosCarregBean.getUltCarregBean().setPlaca1(textoPlaca);
                 dadosCarregBean.setConfirmaDados(0);
             }
         } else {
-            dadosCarregBean.setIdProdCarreg(idProduto);
-            dadosCarregBean.setCpf(textoCPF);
-            dadosCarregBean.setIdCliente(idCliente);
-            dadosCarregBean.setCelular(textoCelular);
-            dadosCarregBean.setPlaca1(textoPlaca);
+            dadosCarregBean.getUltCarregBean().setIdProdCarreg(idProduto);
+            dadosCarregBean.getUltCarregBean().setIdCliente(idCliente);
+            dadosCarregBean.getUltCarregBean().setPlaca1(textoPlaca);
             dadosCarregBean.setConfirmaDados(0);
         }
         DadosRetornoPST senhaRetornoPST = new DadosRetornoPST();
-        if (!dadosCarregBean.getIdProdCarreg().equals("5")) {
-            dadosCarregBean.setIdCliente(null);
+        if (!dadosCarregBean.getUltCarregBean().getIdProdCarreg().equals("5")) {
+            dadosCarregBean.getUltCarregBean().setIdCliente(null);
+        } else {
+            if (dadosCarregBean.getUltCarregBean().getIdCliente().equals("0")) {
+                dadosCarregBean.getUltCarregBean().setIdCliente(null);
+            }    
         }
+        
         this.dadosCarregBean = senhaRetornoPST.retDadosCarreg(dadosCarregBean);
     }
 
@@ -366,48 +344,19 @@ public class AutomacaoCTR {
         if (tipoProduto == TipoProduto.AÇUCAR) {
             idProduto = "1";
         } else {
-            idProduto = "4";
+            idProduto = "9";
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////TelaDadosUltCarreg////////////////////////////////
-    
-    public DadosCarregBean dadosUltCarreg() {
-        DadosCarregBean dadosCarregBean = new DadosCarregBean();
-        dadosCarregBean.setConfirmaDados(1);
-        dadosCarregBean.setCapacidade(ultViagemBean.getCapacidade());
-        dadosCarregBean.setCnhMotorista(ultViagemBean.getCnhMotorista());
-        dadosCarregBean.setDescrProdCarreg(ultViagemBean.getDescrProdCarreg());
-        dadosCarregBean.setIdProdCarreg(ultViagemBean.getIdProdCarreg());
-        dadosCarregBean.setIdTercTransp(ultViagemBean.getIdTercTransp());
-        dadosCarregBean.setNomeTransp(ultViagemBean.getNomeTransp());
-        dadosCarregBean.setPlaca1(ultViagemBean.getPlaca1());
-        dadosCarregBean.setPlaca2(ultViagemBean.getPlaca2());
-        dadosCarregBean.setPlaca3(ultViagemBean.getPlaca3());
-        dadosCarregBean.setRgMotorista(ultViagemBean.getRgMotorista());
-        dadosCarregBean.setValCnhMotorista(ultViagemBean.getValCnhMotorista());
-        dadosCarregBean.setIdCliente(ultViagemBean.getIdCliente());
-        dadosCarregBean.setDescrCliente(ultViagemBean.getDescrCliente());
-        dadosCarregBean.setRuaCliente(ultViagemBean.getRuaCliente());
-        dadosCarregBean.setNumCliente(ultViagemBean.getNumCliente());
-        dadosCarregBean.setBairroCliente(ultViagemBean.getBairroCliente());
-        dadosCarregBean.setComplCliente(ultViagemBean.getComplCliente());
-        dadosCarregBean.setCidadeCliente(ultViagemBean.getCidadeCliente());
-        dadosCarregBean.setEstadoCliente(ultViagemBean.getEstadoCliente());
-        return dadosCarregBean;
-    }
-    
-    ////////////////////////////////////////////////////////////////////////////
-      
+  
     ///////////////////////////TelaImprimirSenha////////////////////////////////
     
     public String msgImprimir() {
         MsgPST msgPST = new MsgPST();
         String tipo;
-        if (dadosCarregBean.getIdProdCarreg().equals("1")
-                || dadosCarregBean.getIdProdCarreg().equals("2")) {
+        if (dadosCarregBean.getUltCarregBean().getIdProdCarreg().equals("1")
+                || dadosCarregBean.getUltCarregBean().getIdProdCarreg().equals("2")) {
             tipo = "1";
         } else {
             tipo = "2";
@@ -432,12 +381,12 @@ public class AutomacaoCTR {
             s.write(tp.textoNegrito(dadosCarregBean.getSenha()));
             s.write("\n");
             s.write("\n");
-            s.write(tp.textoNormal("PLACAS: " + dadosCarregBean.getPlaca1()
-                    + " | " + dadosCarregBean.getPlaca2()
-                    + " | " + dadosCarregBean.getPlaca3() + ""));
+            s.write(tp.textoNormal("PLACAS: " + dadosCarregBean.getUltCarregBean().getPlaca1()
+                    + " | " + dadosCarregBean.getUltCarregBean().getPlaca2()
+                    + " | " + dadosCarregBean.getUltCarregBean().getPlaca3() + ""));
             s.write("\n");
-            if (!dadosCarregBean.getNomeMotorista().equals("0")) {
-                s.write(tp.textoNormal(dadosCarregBean.getNomeMotorista()));
+            if (dadosCarregBean.getUltCarregBean().getNomeMotorista() != null) {
+                s.write(tp.textoNormal(dadosCarregBean.getUltCarregBean().getNomeMotorista()));
             }
             s.write("\n");
             s.write("\n");
@@ -872,14 +821,19 @@ public class AutomacaoCTR {
         this.ultViagemBean = ultViagemBean;
     }
 
-    public DadosCarregBean getDadosCarregBean() {
-        return dadosCarregBean;
+    public String getIdCarreg(){
+        return dadosCarregBean.getIdCarreg();
     }
-
-    public void setDadosCarregBean(DadosCarregBean dadosCarregBean) {
-        this.dadosCarregBean = dadosCarregBean;
+       
+    public String getSenha(){
+        return dadosCarregBean.getSenha();
+    } 
+           
+    public String getDescrEtapa(){
+        return dadosCarregBean.getDescrEtapa();
     }
-    
-    
-
+               
+    public String getMsg(){
+        return dadosCarregBean.getMsg();
+    } 
 }

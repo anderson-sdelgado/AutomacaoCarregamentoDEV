@@ -133,8 +133,8 @@ public class TelaReimprimirJPanel extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 100;
-        gridBagConstraints.ipady = 200;
+        gridBagConstraints.ipadx = 280;
+        gridBagConstraints.ipady = 250;
         gridBagConstraints.insets = new java.awt.Insets(80, 0, 80, 0);
         add(jScrollPane2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
@@ -176,7 +176,7 @@ public class TelaReimprimirJPanel extends javax.swing.JPanel {
     private void reimprimir(){
         switch (this.baseJFrame.getAutomacaoCTR().reimprimir()) {
             case "Retorno":
-                this.baseJFrame.mudarTela("TelaCPFJPanel");
+                this.baseJFrame.mudarTela(Const.TELA_CPF);
                 break;
             case "MSG":
                 msg();
@@ -193,7 +193,7 @@ public class TelaReimprimirJPanel extends javax.swing.JPanel {
     }
     
     public void msg() {
-        defaultJDialog.setTxtMsg(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getMsg());
+        defaultJDialog.setTxtMsg(this.baseJFrame.getAutomacaoCTR().getMsg());
         Timer timer = new Timer(4000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 defaultJDialog.setVisible(false);

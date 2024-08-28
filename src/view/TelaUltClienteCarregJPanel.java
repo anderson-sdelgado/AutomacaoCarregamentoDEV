@@ -218,10 +218,10 @@ public class TelaUltClienteCarregJPanel extends javax.swing.JPanel {
     }
 
     private void carreg() {
-        jLabelCliente.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getDescrCliente());
-        jLabelRuaNumero.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getRuaCliente() + ", " + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getNumCliente());
-        jLabelBairro.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getBairroCliente() + " - " + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getComplCliente());
-        jLabelCidadeUF.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getCidadeCliente() + " - " + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getEstadoCliente());
+        jLabelCliente.setText(this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getDescrCliente());
+        jLabelRuaNumero.setText(this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getRuaCliente() + ", " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getNumCliente());
+        jLabelBairro.setText(this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getBairroCliente() + " - " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getComplCliente());
+        jLabelCidadeUF.setText(this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getCidadeCliente() + " - " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getEstadoCliente());
     }
 
     @Override

@@ -189,11 +189,11 @@ public class TelaProdutoCarregJPanel extends javax.swing.JPanel {
 
     private void jButtonOutrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutrosActionPerformed
 
-        this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().setIdProdCarreg("6");
-        if (this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getNomeMotorista().equals("0")) {
-            this.baseJFrame.mudarTela(Const.TELA_PLACA);
-        } else {
+        this.baseJFrame.getAutomacaoCTR().setIdProduto("6");
+        if (this.baseJFrame.getAutomacaoCTR().isMotoristaExistente()) {
             this.baseJFrame.mudarTela(Const.TELA_ULT_TRANSP_CARREG);
+        } else {
+            this.baseJFrame.mudarTela(Const.TELA_PLACA);
         }
 
     }//GEN-LAST:event_jButtonOutrosActionPerformed

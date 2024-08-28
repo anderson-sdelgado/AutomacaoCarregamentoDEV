@@ -81,7 +81,7 @@ public class TelaUltTranspCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 50;
         add(jButtonRetornar, gridBagConstraints);
 
-        jLabelPerg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabelPerg.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelPerg.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPerg.setText("A Transportadora do carregamento é?");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -91,7 +91,7 @@ public class TelaUltTranspCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(100, 0, 20, 0);
         add(jLabelPerg, gridBagConstraints);
 
-        jLabelTransp.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabelTransp.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
         jLabelTransp.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTransp.setText("Transportadora");
         gridBagConstraints = new java.awt.GridBagConstraints();

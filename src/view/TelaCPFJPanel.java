@@ -406,7 +406,6 @@ public class TelaCPFJPanel extends javax.swing.JPanel {
             case Const.TELA_ULT_DADOS_CARREG_MOTO:
                 this.baseJFrame.mudarTela(Const.TELA_ULT_DADOS_CARREG_MOTO);
                 break;
-
             case Const.TELA_REIMPRIMIR:
                 this.baseJFrame.mudarTela(Const.TELA_REIMPRIMIR);
                 break;

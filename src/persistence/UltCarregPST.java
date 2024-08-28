@@ -81,7 +81,7 @@ public class UltCarregPST {
                 ultCarregBean.setBairroCliente(callableStatement.getString(12));
                 if (callableStatement.getString(13) == null) {
                     ultCarregBean.setComplCliente("");
-                }else{
+                } else{
                     ultCarregBean.setComplCliente(callableStatement.getString(13));
                 }
                 ultCarregBean.setCidadeCliente(callableStatement.getString(14));
@@ -94,20 +94,17 @@ public class UltCarregPST {
                 ultCarregBean.setPlaca1(callableStatement.getString(21));
                 if (callableStatement.getString(22) == null) {
                     ultCarregBean.setPlaca2("");
-                }
-                else{
+                } else{
                     ultCarregBean.setPlaca2(callableStatement.getString(22));
                 }
                 if (callableStatement.getString(23) == null) {
                     ultCarregBean.setPlaca3("");
-                }
-                else{
+                } else{
                     ultCarregBean.setPlaca3(callableStatement.getString(23));
                 }
                 if (callableStatement.getString(24) == null) {
                     ultCarregBean.setCapacidade("");
-                }
-                else{
+                } else{
                     ultCarregBean.setCapacidade(callableStatement.getString(24));
                 }
                 

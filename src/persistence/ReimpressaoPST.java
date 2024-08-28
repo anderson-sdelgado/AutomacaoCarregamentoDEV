@@ -9,6 +9,7 @@ import dbutil.Conn;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import bean.DadosCarregBean;
+import bean.UltCarregBean;
 
 /**
  *
@@ -45,27 +46,28 @@ public class ReimpressaoPST {
             callableStatement.executeUpdate();
             
             dadosCarregBean.setIdCarreg(idPreOrdCarreg);
-            dadosCarregBean.setPlaca1(callableStatement.getString(2));
+            dadosCarregBean.setUltCarregBean(new UltCarregBean());
+            dadosCarregBean.getUltCarregBean().setPlaca1(callableStatement.getString(2));
             
             if (callableStatement.getString(3) == null) {
-                dadosCarregBean.setPlaca2("");
+                dadosCarregBean.getUltCarregBean().setPlaca2("");
             }
             else{
-                dadosCarregBean.setPlaca2(callableStatement.getString(3));
+                dadosCarregBean.getUltCarregBean().setPlaca2(callableStatement.getString(3));
             }
             
             if (callableStatement.getString(4) == null) {
-                dadosCarregBean.setPlaca3("");
+                dadosCarregBean.getUltCarregBean().setPlaca3("");
             }
             else{
-                dadosCarregBean.setPlaca3(callableStatement.getString(4));
+                dadosCarregBean.getUltCarregBean().setPlaca3(callableStatement.getString(4));
             }
             
             if (callableStatement.getString(5) != null) {
-                dadosCarregBean.setNomeMotorista(callableStatement.getString(5));
+                dadosCarregBean.getUltCarregBean().setNomeMotorista(callableStatement.getString(5));
             }
             else{
-                dadosCarregBean.setNomeMotorista("0");
+                dadosCarregBean.getUltCarregBean().setNomeMotorista("0");
             }
             
             dadosCarregBean.setSenha(callableStatement.getString(6));
@@ -91,7 +93,7 @@ public class ReimpressaoPST {
         return dadosCarregBean;
     }
     
-    public void addReimpressao(DadosCarregBean dadosCarregTO) {
+    public void addReimpressao(String idPreOrdCarreg) {
 
         Connection conn = null;
         CallableStatement callableStatement = null;
@@ -102,8 +104,8 @@ public class ReimpressaoPST {
             conn = Conn.getInstance().getConnection();
             callableStatement = conn.prepareCall(sql);
             
-            System.out.println("dadosCarregTO.getIdPreOrdCarreg() = " + dadosCarregTO.getIdPreOrdCarreg());
-            callableStatement.setInt(1, Integer.parseInt(dadosCarregTO.getIdPreOrdCarreg()));
+            System.out.println("dadosCarregTO.getIdPreOrdCarreg() = " + idPreOrdCarreg);
+            callableStatement.setInt(1, Integer.parseInt(idPreOrdCarreg));
             
             callableStatement.executeUpdate();
             

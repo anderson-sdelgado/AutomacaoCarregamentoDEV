@@ -124,6 +124,8 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 280;
+        gridBagConstraints.ipady = 100;
         add(jScroll, gridBagConstraints);
 
         jButtonOK.setBackground(new java.awt.Color(255, 255, 255));
@@ -177,8 +179,8 @@ public class TelaImprimirSenhaJPanel extends javax.swing.JPanel {
 
     public void exibir() {
         
-        jLabelSenha.setText(this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getSenha());
-        jLabelStatus.setText("STATUS: " + this.baseJFrame.getAutomacaoCTR().getDadosCarregBean().getDescrEtapa());
+        jLabelSenha.setText(this.baseJFrame.getAutomacaoCTR().getSenha());
+        jLabelStatus.setText("STATUS: " + this.baseJFrame.getAutomacaoCTR().getDescrEtapa());
         jLabelMsg.setText(this.baseJFrame.getAutomacaoCTR().msgImprimir().replace(".", ".\n").toUpperCase());
         jLabelMsg.setLineWrap(true);
 

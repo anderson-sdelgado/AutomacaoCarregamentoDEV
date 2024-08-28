@@ -42,7 +42,6 @@ public class TelaUltVeicCarregJPanel extends javax.swing.JPanel {
         jButtonCancelar = new javax.swing.JButton();
         jButtonRetornar = new javax.swing.JButton();
         jLabelVeicUltCarreg = new javax.swing.JLabel();
-        jLabelVeiculo = new javax.swing.JLabel();
         jLabelPlaca1 = new javax.swing.JLabel();
         jLabelPlaca2 = new javax.swing.JLabel();
         jLabelPlaca3 = new javax.swing.JLabel();
@@ -87,25 +86,15 @@ public class TelaUltVeicCarregJPanel extends javax.swing.JPanel {
 
         jLabelVeicUltCarreg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabelVeicUltCarreg.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelVeicUltCarreg.setText("Veículo a ser carregado contém?");
+        jLabelVeicUltCarreg.setText("Por favor, confirme as placas dos veiculos:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(50, 0, 10, 0);
+        gridBagConstraints.insets = new java.awt.Insets(50, 0, 40, 0);
         add(jLabelVeicUltCarreg, gridBagConstraints);
 
-        jLabelVeiculo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabelVeiculo.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelVeiculo.setText("VEÍCULO");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 10, 0);
-        add(jLabelVeiculo, gridBagConstraints);
-
-        jLabelPlaca1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelPlaca1.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jLabelPlaca1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPlaca1.setText("Placa 1: AAA-0000");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -115,7 +104,7 @@ public class TelaUltVeicCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         add(jLabelPlaca1, gridBagConstraints);
 
-        jLabelPlaca2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelPlaca2.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jLabelPlaca2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPlaca2.setText("Placa 1: AAA-0000");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -125,7 +114,7 @@ public class TelaUltVeicCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         add(jLabelPlaca2, gridBagConstraints);
 
-        jLabelPlaca3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelPlaca3.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jLabelPlaca3.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPlaca3.setText("Placa 1: AAA-0000");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -135,7 +124,7 @@ public class TelaUltVeicCarregJPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
         add(jLabelPlaca3, gridBagConstraints);
 
-        jLabelCapacidade.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelCapacidade.setFont(new java.awt.Font("Tahoma", 0, 28)); // NOI18N
         jLabelCapacidade.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCapacidade.setText("Capacidade: 650 SCS");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -217,13 +206,12 @@ public class TelaUltVeicCarregJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelPlaca2;
     private javax.swing.JLabel jLabelPlaca3;
     private javax.swing.JLabel jLabelVeicUltCarreg;
-    private javax.swing.JLabel jLabelVeiculo;
     // End of variables declaration//GEN-END:variables
     
     private void carreg() {
-        jLabelPlaca1.setText("Placa 1: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getPlaca1());
-        jLabelPlaca2.setText("Placa 2: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getPlaca2());
-        jLabelPlaca3.setText("Placa 3: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getPlaca3());
+        jLabelPlaca1.setText("Tracionador: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getPlaca1());
+        jLabelPlaca2.setText("Carreta 1: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getPlaca2());
+        jLabelPlaca3.setText("Carreta 2: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getPlaca3());
         jLabelCapacidade.setText("Capacidade: " + this.baseJFrame.getAutomacaoCTR().getUltViagemBean().getCapacidade());
     }
 
